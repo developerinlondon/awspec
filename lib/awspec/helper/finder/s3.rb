@@ -23,6 +23,38 @@ module Awspec::Helper
         false
       end
 
+      def get_object(id, key)
+        res = s3_client.head_object({
+                                      bucket: id,
+                                      key: key
+                                    })
+        res.data.class == Aws::S3::Types::HeadObjectOutput
+      rescue Aws::S3::Errors::NotFound
+        false
+      end
+
+      def put_object(id, key, body, server_side_encryption)
+        res = s3_client.put_object({
+                                      bucket: id,
+                                      key: key,
+                                      #server_side_encryption: server_side_encryption,
+                                      body: body
+                                    })
+      #  res.data.class == Aws::S3::Types::PutObjectOutput
+      # rescue Aws::S3::Errors::ServiceError
+      #   false
+      end
+
+      def list_bucket(id, prefix=nil)
+        res = s3_client.list_objects_v2({
+                                          bucket: id,
+                                          prefix: prefix
+                                        })
+        res.data.class == Aws::S3::Types::ListObjectsV2Output
+      rescue Aws::S3::Errors::AccessDenied
+        false
+      end
+
       def find_bucket_cors(id)
         s3_client.get_bucket_cors(bucket: id)
       rescue Aws::S3::Errors::ServiceError

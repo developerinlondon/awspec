@@ -54,6 +54,22 @@ module Awspec::Type
       cors_rules.count
     end
 
+    def has_list_bucket_permission?()
+      return list_bucket(id)
+    end
+
+    def has_list_bucket_permission_with_prefix?(prefix)
+      return list_bucket(id, prefix)
+    end
+
+    def has_get_object_permission?(key)
+     get_object(id, key)
+    end
+
+    def has_put_object_permission?(key:,body:, server_side_encryption: 'AES256')
+      put_object(id, key, body, server_side_encryption)
+    end
+
     def has_policy?(policy)
       check_existence
       bp = find_bucket_policy(id)
