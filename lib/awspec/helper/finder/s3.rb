@@ -41,6 +41,7 @@ module Awspec::Helper
                                       #server_side_encryption: server_side_encryption,
                                       body: body
                                     })
+        puts "res #{res.to_s}"
       #  res.data.class == Aws::S3::Types::PutObjectOutput
       # rescue Aws::S3::Errors::ServiceError
       #   false
