@@ -34,7 +34,6 @@ module Awspec::Helper
       end
 
       def put_object(id, key, body, server_side_encryption)
-        puts "body #{body} key #{key}"
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
