@@ -70,6 +70,10 @@ module Awspec::Type
       put_object(id, s3_file, local_file, server_side_encryption)
     end
 
+    def has_delete_object_permission?(filename)
+      delete_object(id, filename)
+    end
+
     def has_policy?(policy)
       check_existence
       bp = find_bucket_policy(id)

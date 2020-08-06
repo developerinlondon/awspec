@@ -37,8 +37,18 @@ module Awspec::Helper
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
-                                      #server_side_encryption: server_side_encryption,
+                                      server_side_encryption: server_side_encryption,
                                       body: body
+                                    })
+        rescue Aws::S3::Errors::AccessDenied => e
+          puts "error: #{e.inspect}"
+          false
+      end
+
+      def delete_object(id, key)
+        res = s3_client.put_object({
+                                      bucket: id,
+                                      key: key
                                     })
         rescue Aws::S3::Errors::AccessDenied => e
           puts "error: #{e.inspect}"
