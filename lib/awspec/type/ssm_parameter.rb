@@ -22,5 +22,10 @@ module Awspec::Type
       return nil if tag.value != value
       tag
     end
+
+    def has_get_parameter_permission?(name)
+      get_ssm_parameter(name)
+    end
+
   end
 end
