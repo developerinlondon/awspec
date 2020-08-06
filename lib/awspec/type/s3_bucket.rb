@@ -66,8 +66,8 @@ module Awspec::Type
      get_object(id, key)
     end
 
-    def has_put_object_permission?(key:,body:, server_side_encryption: 'AES256')
-      put_object(id, key, body, server_side_encryption)
+    def has_put_object_permission?(s3_file:,local_file:, server_side_encryption: 'AES256')
+      put_object(id, s3_file, local_file, server_side_encryption)
     end
 
     def has_policy?(policy)
