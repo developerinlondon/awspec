@@ -58,10 +58,6 @@ module Awspec::Type
       return list_bucket(id, prefix)
     end
 
-    # def has_list_bucket_permission_with_prefix?(prefix)
-    #   return list_bucket(id, prefix)
-    # end
-
     def has_get_object_permission?(key)
      get_object(id, key)
     end
