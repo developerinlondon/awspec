@@ -41,13 +41,9 @@ module Awspec::Helper
                                       #server_side_encryption: server_side_encryption,
                                       body: body
                                     })
-        puts "res #{res.inspect}"
         rescue Aws::S3::Errors::AccessDenied => e
-          puts "data: #{e.inspect}"
-          #puts e.full_message(highlight: true, order: :top)
-      #  res.data.class == Aws::S3::Types::PutObjectOutput
-      # rescue Aws::S3::Errors::ServiceError
-      #   false
+          puts "error: #{e.inspect}"
+          false
       end
 
       def list_bucket(id, prefix=nil)
