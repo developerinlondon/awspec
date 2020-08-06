@@ -54,8 +54,8 @@ module Awspec::Type
       cors_rules.count
     end
 
-    def has_list_bucket_permission?()
-      return list_bucket(id)
+    def has_list_bucket_permission?(prefix=nil)
+      return list_bucket(id, prefix)
     end
 
     def has_list_bucket_permission_with_prefix?(prefix)

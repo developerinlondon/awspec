@@ -85,4 +85,4 @@ require 'awspec/matcher/have_env_var'
 require 'awspec/matcher/have_env_var_value'
 
 # S3
-#require 'awspec/matcher/with_prefix'
+require 'awspec/matcher/have_list_bucket_permission'
