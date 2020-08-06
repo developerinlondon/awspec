@@ -42,6 +42,8 @@ module Awspec::Helper
                                       body: body
                                     })
         puts "res #{res.to_s}"
+        rescue StandardError => e
+          puts e.full_message(highlight: true, order: :top)
       #  res.data.class == Aws::S3::Types::PutObjectOutput
       # rescue Aws::S3::Errors::ServiceError
       #   false
