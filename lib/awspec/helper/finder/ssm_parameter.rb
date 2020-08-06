@@ -37,6 +37,7 @@ module Awspec::Helper
         rescue Aws::SSM::Errors::ServiceError => e
           puts "error: #{e.inspect}"
           false
+        end
       end
 
     end
