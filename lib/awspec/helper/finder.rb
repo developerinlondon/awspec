@@ -162,8 +162,16 @@ module Awspec::Helper
       cognito_identity_provider_client: Aws::CognitoIdentityProvider::Client
     }
 
+    role_credentials = nil
+    if ENV['assume_role_arn'] do
+      role_credentials = Aws::AssumeRoleCredentials.new(
+        role_arn: ENV['assume_role_arn']
+      )
+    end
+
     CLIENT_OPTIONS = {
       http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil
+      credentials: role_credentials
     }
 
     CLIENTS.each do |method_name, client|
