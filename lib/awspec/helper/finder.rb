@@ -162,17 +162,17 @@ module Awspec::Helper
       cognito_identity_provider_client: Aws::CognitoIdentityProvider::Client
     }
 
-    role_credentials = nil
-    unless ENV['assume_role_arn'] == nil
-      role_credentials = Aws::AssumeRoleCredentials.new(
-        role_arn: ENV['assume_role_arn'],
- #       role_arn: "arn:aws:iam::806788064098:role/AWS_DUB_ROL_0097_DataEngDevTestSenTZ001_Dev",
-        role_session_name: "session"
-      )
-    end
+ #    role_credentials = nil
+ #    unless ENV['assume_role_arn'] == nil
+ #      role_credentials = Aws::AssumeRoleCredentials.new(
+ #        role_arn: ENV['assume_role_arn'],
+ # #       role_arn: "arn:aws:iam::806788064098:role/AWS_DUB_ROL_0097_DataEngDevTestSenTZ001_Dev",
+ #        role_session_name: "session"
+ #      )
+ #    end
 
     CLIENT_OPTIONS = {
-      credentials: role_credentials,
+      credentials: ENV['assume_role_arn'].nil? ? nil : role_credentials = Aws::AssumeRoleCredentials.new(role_arn: ENV['assume_role_arn'],role_session_name: "session"),
       http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil
       
     }
