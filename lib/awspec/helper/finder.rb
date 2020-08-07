@@ -74,6 +74,7 @@ module Awspec::Helper
     include Awspec::Helper::Finder::Autoscaling
     include Awspec::Helper::Finder::Ebs
     include Awspec::Helper::Finder::Elb
+    include Awspec::Helper::Finder::Glue
     include Awspec::Helper::Finder::Lambda
     include Awspec::Helper::Finder::Iam
     include Awspec::Helper::Finder::Kms
