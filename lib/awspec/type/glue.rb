@@ -6,7 +6,7 @@ module Awspec::Type
     end
 
     def resource_via_client
-      @resource_via_client ||= get_catalog(@display_name)
+      @resource_via_client ||= nil
     end
 
     def id
