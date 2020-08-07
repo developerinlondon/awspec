@@ -170,8 +170,9 @@ module Awspec::Helper
     end
 
     CLIENT_OPTIONS = {
-      http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil,
-      credentials: role_credentials
+      credentials: role_credentials,
+      http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil
+      
     }
 
     CLIENTS.each do |method_name, client|
