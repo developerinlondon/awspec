@@ -11,14 +11,15 @@ module Awspec::Type
 
     def has_catalog?(catalog)
       check_existence
+      get_catalog(id, catalog)
     end
 
     def has_database?(databasename)
-      return get_database(id, databasename)
+      get_database(id, databasename)
     end
 
     def has_table?(database:, table:)
-     get_table(id, database, table)
+      get_table(id, database, table)
     end
 
   end

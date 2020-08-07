@@ -1,11 +1,11 @@
 module Awspec::Helper
   module Finder
     module Glue
-      def find_catalog(id)
+      def get_catalog(id)
         id
       end
 
-      def find_database(id, name)
+      def get_database(id, name)
         glue_client.get_database({
           catalog_id: "#{id}",
           name: "#{name}"
@@ -15,7 +15,7 @@ module Awspec::Helper
           false
       end
 
-      def find_table(id, databasename, tablename)
+      def get_table(id, databasename, tablename)
         glue_client.get_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}",
