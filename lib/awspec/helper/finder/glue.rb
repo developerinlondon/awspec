@@ -7,7 +7,7 @@ module Awspec::Helper
         })
         rescue Aws::Glue::Errors::ServiceError => e
           #puts "error: #{e.inspect}"
-          false
+          nil
       end
 
       def get_database(id, name)
