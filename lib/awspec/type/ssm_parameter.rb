@@ -23,7 +23,7 @@ module Awspec::Type
       tag
     end
 
-    def has_get_parameter_permission?(name)
+    def has_get_ssm_parameter_permission?(name)
       get_ssm_parameter(name)
     end
 
