@@ -18,7 +18,7 @@ module Awspec::Type
       get_catalog(catalog)
     end
 
-    def has_get_database_permission?(database)
+    def has_get_database_permission?(database:)
       get_database(id, database)
     end
 

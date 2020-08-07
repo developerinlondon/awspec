@@ -3,11 +3,11 @@ RSpec::Matchers.define :have_get_table_permission do
     glue.has_get_table_permission?(database: @database, table: @table)
   end
 
-  chain :with_database do |database|
+  chain :on_database do |database|
     @database = database
   end
 
-  chain :and_table do |table|
+  chain :for_table do |table|
     @table = table
   end
 end
