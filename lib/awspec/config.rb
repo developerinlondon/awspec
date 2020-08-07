@@ -10,7 +10,7 @@ module Awspec
       @config = {
         client_backoff: 0.0,
         client_backoff_limit: 30.0,
-        client_iteration: 1
+        client_iteration: 1,
         client_options: {
           #credentials: ENV['assume_role_arn'].nil? ? nil : role_credentials = Aws::AssumeRoleCredentials.new(role_arn: ENV['assume_role_arn'],role_session_name: "session"),
           #credentials: role_credentials,
