@@ -2,7 +2,12 @@ module Awspec::Helper
   module Finder
     module Glue
       def get_catalog(id)
-        id
+        glue_client.get_data_catalog_encryption_settings({
+          catalog_id: "#{id}",
+        })
+        rescue Aws::Glue::Errors::ServiceError => e
+          puts "error: #{e.inspect}"
+          nil
       end
 
       def get_database(id, name)

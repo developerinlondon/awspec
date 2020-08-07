@@ -121,6 +121,7 @@ module Awspec::Helper
       rds_client: Aws::RDS::Client,
       route53_client: Aws::Route53::Client,
       s3_client: Aws::S3::Client,
+      glue_client: Aws::Glue::Client,
       autoscaling_client: Aws::AutoScaling::Client,
       elb_client: Aws::ElasticLoadBalancing::Client,
       elbv2_client: Aws::ElasticLoadBalancingV2::Client,
