@@ -172,7 +172,8 @@ module Awspec::Helper
  #    end
 
     CLIENT_OPTIONS = {
-      credentials: ENV['assume_role_arn'].nil? ? nil : Aws::AssumeRoleCredentials.new(role_arn: ENV['assume_role_arn'],role_session_name: "session"),
+      #credentials: ENV['assume_role_arn'].nil? ? nil : role_credentials = Aws::AssumeRoleCredentials.new(role_arn: ENV['assume_role_arn'],role_session_name: "session"),
+      #credentials: role_credentials,
       http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil
     }
 
