@@ -163,7 +163,7 @@ module Awspec::Helper
     }
 
     role_credentials = nil
-    if ENV['assume_role_arn'] do
+    unless ENV['assume_role_arn'] == nil
       role_credentials = Aws::AssumeRoleCredentials.new(
         role_arn: ENV['assume_role_arn']
       )
