@@ -18,11 +18,11 @@ module Awspec::Type
       get_catalog(catalog)
     end
 
-    def has_database?(database)
+    def has_get_database_permission?(database)
       get_database(id, database)
     end
 
-    def has_table?(database:, table:)
+    def has_get_table_permission?(database:, table:)
       get_table(id, database, table)
     end
 
