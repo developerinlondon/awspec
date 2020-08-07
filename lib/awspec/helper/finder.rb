@@ -167,6 +167,7 @@ module Awspec::Helper
       role_credentials = Aws::AssumeRoleCredentials.new(
 #        role_arn: ENV['assume_role_arn']
         role_arn: "arn:aws:iam::806788064098:role/AWS_DUB_ROl_0097_DataEngDevTestSenTZ001_Dev"
+        role_session_name: "session-dataengdevtestsentz001-dev"
       )
     #end
 
