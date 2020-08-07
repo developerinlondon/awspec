@@ -3,9 +3,10 @@ require 'awspec/config'
 module Awspec::Helper
   class ClientWrap
     attr_reader :client, :backoff, :iteration, :backoff_limit, :symbol1, :symbol2
-    def initialize(real_client = nil)
-      raise ArgumentError, 'Client can not be nil' if real_client.nil?
+    def initialize(client = nil)
+      raise ArgumentError, 'Client can not be nil' if lient.nil?
       config = Awspec::Config.instance
+      real_client   = client.new(config[:client_options])
       @client        = real_client
       @backoff       = config[:client_backoff]
       @orig_backoff  = @backoff

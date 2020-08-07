@@ -171,18 +171,18 @@ module Awspec::Helper
  #      )
  #    end
 
-    CLIENT_OPTIONS = {
-      #credentials: ENV['assume_role_arn'].nil? ? nil : role_credentials = Aws::AssumeRoleCredentials.new(role_arn: ENV['assume_role_arn'],role_session_name: "session"),
-      #credentials: role_credentials,
-      http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil
-    }
+    # CLIENT_OPTIONS = {
+    #   #credentials: ENV['assume_role_arn'].nil? ? nil : role_credentials = Aws::AssumeRoleCredentials.new(role_arn: ENV['assume_role_arn'],role_session_name: "session"),
+    #   #credentials: role_credentials,
+    #   http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil
+    # }
 
     CLIENTS.each do |method_name, client|
       define_method method_name do
         unless self.methods.include? "@#{method_name}"
           instance_variable_set(
             "@#{method_name}",
-            Awspec::Helper::ClientWrap.new(client.new(CLIENT_OPTIONS))
+            Awspec::Helper::ClientWrap.new(client)
           )
         end
       end
