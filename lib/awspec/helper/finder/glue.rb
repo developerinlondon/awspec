@@ -9,7 +9,7 @@ module Awspec::Helper
         glue_client.get_database({
           catalog_id: "#{id}",
           name: "#{name}"
-        }
+        })
         rescue Aws::Glue::Errors::ServiceError => e
           puts "error: #{e.inspect}"
           false
