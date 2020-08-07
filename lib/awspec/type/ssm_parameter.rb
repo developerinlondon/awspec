@@ -27,5 +27,9 @@ module Awspec::Type
       get_ssm_parameter(name)
     end
 
+    def has_describe_ssm_parameter_permission?(name)
+      find_ssm_parameter(name)
+    end
+
   end
 end
