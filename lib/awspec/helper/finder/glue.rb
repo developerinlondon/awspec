@@ -6,8 +6,8 @@ module Awspec::Helper
           catalog_id: "#{id}",
         })
         rescue Aws::Glue::Errors::ServiceError => e
-          puts "error: #{e.inspect}"
-          nil
+          #puts "error: #{e.inspect}"
+          false
       end
 
       def get_database(id, name)
@@ -16,7 +16,7 @@ module Awspec::Helper
           name: "#{name}"
         })
         rescue Aws::Glue::Errors::ServiceError => e
-          puts "error: #{e.inspect}"
+          #puts "error: #{e.inspect}"
           false
       end
 
@@ -27,7 +27,7 @@ module Awspec::Helper
           name: "#{tablename}"
         })
         rescue Aws::Glue::Errors::ServiceError => e
-          puts "error: #{e.inspect}"
+          #puts "error: #{e.inspect}"
           false
       end
 
