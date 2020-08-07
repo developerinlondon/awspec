@@ -27,6 +27,19 @@ module Awspec::Helper
         end
         return tag if tag
       end
+
+      def get_ssm_parameter(name)
+        begin
+          response = ssm_client.get_parameter({
+            name: name,
+            with_decryption: false,
+          })
+        rescue Aws::SSM::Errors::ServiceError => e
+          puts "error: #{e.inspect}"
+          false
+        end
+      end
+
     end
   end
 end
