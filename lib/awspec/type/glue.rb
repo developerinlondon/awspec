@@ -1,5 +1,9 @@
 module Awspec::Type
   class Glue < ResourceBase
+    def initialize(name)
+      super
+      @display_name = name
+    end
 
     def resource_via_client
       @resource_via_client ||= get_catalog(id)
