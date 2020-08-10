@@ -50,9 +50,9 @@ module Awspec::Helper
       def create_table(id, databasename, tablename)
         resp = client.create_table({
           catalog_id: "#{id}",
-          database_name: "#{databasename}",
+          database_name: "#{databasename}", # required
           table_input: { # required
-            name: "NameString", # required
+            name: "#{tablename}", # required
             description: "DescriptionString",
             owner: "NameString",
             last_access_time: Time.now,
