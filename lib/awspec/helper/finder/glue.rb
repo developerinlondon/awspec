@@ -52,12 +52,12 @@ module Awspec::Helper
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
-            name: "#{tablename}", # required
+            name: "#{tablename}"#, # required
             #description: "DescriptionString",
             #owner: "NameString",
-            last_access_time: Time.now,
-            last_analyzed_time: Time.now,
-            retention: 1,
+            # last_access_time: Time.now,
+            # last_analyzed_time: Time.now,
+            # retention: 1,
             # partition_keys: [
             #   {
             #     name: "NameString", # required
@@ -74,11 +74,11 @@ module Awspec::Helper
             # parameters: {
             #   "KeyString" => "ParametersMapValue",
             # },
-            target_table: {
-              catalog_id: "#{id}",
-              database_name: "#{databasename}",
-              name: "#{tablename}",
-            },
+            # target_table: {
+            #   catalog_id: "#{id}",
+            #   database_name: "#{databasename}",
+            #   name: "#{tablename}",
+            # },
           },
         })
 
