@@ -9,7 +9,7 @@ module Awspec::Helper
           nil
       end
 
-      def get_databasess(id)
+      def get_databases(id)
         resp = glue_client.get_databases({
           catalog_id: "#{id}"
         })
