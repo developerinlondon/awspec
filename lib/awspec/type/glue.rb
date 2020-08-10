@@ -34,5 +34,9 @@ module Awspec::Type
       get_table(id, database, table)
     end
 
+    def has_create_table_permission?(database:, table:)
+      create_table(id, databae, table)
+    end
+
   end
 end
