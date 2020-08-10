@@ -68,9 +68,9 @@ module Awspec::Helper
             #     },
             #   },
             # ],
-            view_original_text: "ViewTextString",
-            view_expanded_text: "ViewTextString",
-            table_type: "TableTypeString",
+            # view_original_text: "ViewTextString",
+            # view_expanded_text: "ViewTextString",
+            # table_type: "TableTypeString",
             # parameters: {
             #   "KeyString" => "ParametersMapValue",
             # },
