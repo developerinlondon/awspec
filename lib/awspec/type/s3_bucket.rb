@@ -66,6 +66,10 @@ module Awspec::Type
       put_object(id, s3_file, local_file, server_side_encryption)
     end
 
+    def has_put_prefix_permission?(s3_prefix:, server_side_encryption: nil)
+      put_prefix(id, s3_prefix, server_side_encryption)
+    end
+
     def has_delete_object_permission?(filename)
       delete_object(id, filename)
     end
