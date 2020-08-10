@@ -27,6 +27,15 @@ module Awspec::Helper
           false
       end
 
+      def get_tables(id, databasename)
+        glue_client.get_tables({
+          catalog_id: "#{id}",
+          database_name: "#{databasename}"
+        })
+        rescue Aws::Glue::Errors::ServiceError => e
+          false
+      end
+
       def get_table(id, databasename, tablename)
         glue_client.get_table({
           catalog_id: "#{id}",
