@@ -39,7 +39,7 @@ module Awspec::Type
     end
 
     def has_update_table_permission?(database:, table:, new_table:)
-      update_table(id, database, table, new_tablename)
+      update_table(id, database, table, new_table)
     end
   end
 end
