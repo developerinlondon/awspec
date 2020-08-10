@@ -22,7 +22,6 @@ module Awspec::Type
       get_databases(id, database)
     end
 
-s
     def has_get_database_permission?(database:)
       get_database(id, database)
     end
