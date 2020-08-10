@@ -53,7 +53,7 @@ module Awspec::Helper
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}", # required
-            description: "DescriptionString",
+            #description: "DescriptionString",
             owner: "NameString",
             last_access_time: Time.now,
             last_analyzed_time: Time.now,
