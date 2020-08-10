@@ -6,8 +6,16 @@ module Awspec::Helper
           catalog_id: "#{id}",
         })
         rescue Aws::Glue::Errors::ServiceError => e
-          #puts "error: #{e.inspect}"
           nil
+      end
+
+      def get_databasess(id)
+        resp = glue_client.get_databases({
+          catalog_id: "#{id}"
+        })
+        resp.database_list.count
+        rescue Aws::Glue::Errors::ServiceError => e
+          false
       end
 
       def get_database(id, name)
@@ -16,7 +24,6 @@ module Awspec::Helper
           name: "#{name}"
         })
         rescue Aws::Glue::Errors::ServiceError => e
-          #puts "error: #{e.inspect}"
           false
       end
 
@@ -27,7 +34,6 @@ module Awspec::Helper
           name: "#{tablename}"
         })
         rescue Aws::Glue::Errors::ServiceError => e
-          #puts "error: #{e.inspect}"
           false
       end
 
