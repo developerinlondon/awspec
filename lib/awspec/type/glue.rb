@@ -27,7 +27,7 @@ module Awspec::Type
     end
 
     def has_get_tables_permission?(database:)
-      get_table(id, database)
+      get_tables(id, database)
     end
 
     def has_get_table_permission?(database:, table:)
