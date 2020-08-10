@@ -50,7 +50,7 @@ module Awspec::Helper
       def create_table(id, databasename, tablename)
         resp = client.create_table({
           catalog_id: "#{id}",
-          database_name: "#{databasename}"
+          database_name: "#{databasename}",
           table_input: { # required
             name: "NameString", # required
             description: "DescriptionString",
@@ -118,7 +118,7 @@ module Awspec::Helper
             },
             target_table: {
               catalog_id: "#{id}",
-              database_name: "#{databasename}"
+              database_name: "#{databasename}",
               name: "#{tablename}",
             },
           },
