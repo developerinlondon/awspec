@@ -90,4 +90,5 @@ require 'awspec/matcher/have_list_bucket_permission'
 # glue
 require 'awspec/matcher/have_get_table_permission'
 require 'awspec/matcher/have_get_tables_permission'
+require 'awspec/matcher/have_create_table_permission'
 require 'awspec/matcher/have_get_database_permission'

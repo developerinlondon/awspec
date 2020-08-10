@@ -1,4 +1,4 @@
-RSpec::Matchers.define :have_get_table_permission do
+RSpec::Matchers.define :have_create_table_permission do
   match do |glue|
     glue.has_create_table_permission?(database: @database, table: @table)
   end
