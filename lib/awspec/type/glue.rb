@@ -38,5 +38,8 @@ module Awspec::Type
       create_table(id, database, table)
     end
 
+    def has_update_table_permission?(database:, table:, new_table:)
+      update_table(id, database, table, new_tablename)
+    end
   end
 end

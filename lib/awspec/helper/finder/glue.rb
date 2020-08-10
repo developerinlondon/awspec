@@ -85,6 +85,45 @@ module Awspec::Helper
         # rescue Aws::Glue::Errors::ServiceError => e
         #   false
       end
+
+      def update_table(id, databasename, tablename, newtablename)
+        resp = glue_client.update_table({
+          catalog_id: "#{id}",
+          database_name: "#{databasename}", # required
+          table_input: { # required
+            name: "#{tablename}", # required
+            #description: "DescriptionString",
+            #owner: "NameString",
+            # last_access_time: Time.now,
+            # last_analyzed_time: Time.now,
+            # retention: 1,
+            # partition_keys: [
+            #   {
+            #     name: "NameString", # required
+            #     type: "ColumnTypeString",
+            #     comment: "CommentString",
+            #     parameters: {
+            #       "KeyString" => "ParametersMapValue",
+            #     },
+            #   },
+            # ],
+            # view_original_text: "ViewTextString",
+            # view_expanded_text: "ViewTextString",
+            # table_type: "TableTypeString",
+            # parameters: {
+            #   "KeyString" => "ParametersMapValue",
+            # },
+            target_table: {
+              catalog_id: "#{id}",
+              database_name: "#{databasename}",
+              name: "#{newtablename}",
+            }
+          },
+        })
+
+        # rescue Aws::Glue::Errors::ServiceError => e
+        #   false
+      end
     end
   end
 end
