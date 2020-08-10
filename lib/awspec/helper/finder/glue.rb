@@ -124,8 +124,8 @@ module Awspec::Helper
           },
         })
 
-        rescue Aws::Glue::Errors::ServiceError => e
-          false
+        # rescue Aws::Glue::Errors::ServiceError => e
+        #   false
       end
     end
   end
