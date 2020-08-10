@@ -58,16 +58,16 @@ module Awspec::Helper
             last_access_time: Time.now,
             last_analyzed_time: Time.now,
             retention: 1,
-            partition_keys: [
-              {
-                name: "NameString", # required
-                type: "ColumnTypeString",
-                comment: "CommentString",
-                parameters: {
-                  "KeyString" => "ParametersMapValue",
-                },
-              },
-            ],
+            # partition_keys: [
+            #   {
+            #     name: "NameString", # required
+            #     type: "ColumnTypeString",
+            #     comment: "CommentString",
+            #     parameters: {
+            #       "KeyString" => "ParametersMapValue",
+            #     },
+            #   },
+            # ],
             view_original_text: "ViewTextString",
             view_expanded_text: "ViewTextString",
             table_type: "TableTypeString",
