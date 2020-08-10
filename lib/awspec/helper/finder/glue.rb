@@ -54,7 +54,7 @@ module Awspec::Helper
           table_input: { # required
             name: "#{tablename}", # required
             #description: "DescriptionString",
-            owner: "NameString",
+            #owner: "NameString",
             last_access_time: Time.now,
             last_analyzed_time: Time.now,
             retention: 1,
