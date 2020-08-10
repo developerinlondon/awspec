@@ -48,7 +48,7 @@ module Awspec::Helper
       end
 
       def create_table(id, databasename, tablename)
-        resp = client.create_table({
+        resp = glue_client.create_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
