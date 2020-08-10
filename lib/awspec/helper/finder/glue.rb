@@ -71,9 +71,9 @@ module Awspec::Helper
             view_original_text: "ViewTextString",
             view_expanded_text: "ViewTextString",
             table_type: "TableTypeString",
-            parameters: {
-              "KeyString" => "ParametersMapValue",
-            },
+            # parameters: {
+            #   "KeyString" => "ParametersMapValue",
+            # },
             target_table: {
               catalog_id: "#{id}",
               database_name: "#{databasename}",
