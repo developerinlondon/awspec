@@ -19,7 +19,7 @@ module Awspec::Type
     end
 
     def has_get_databases_permission?()
-      get_databases(id, database)
+      get_databases(id)
     end
 
     def has_get_database_permission?(database:)
