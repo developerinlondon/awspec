@@ -35,6 +35,7 @@ module Awspec::Type
     end
 
     def has_create_table_permission?(database:, table:, description:)
+      puts "CT: database is #{database} and table is #{table}"
       create_table(id, database, table, description)
     end
 
