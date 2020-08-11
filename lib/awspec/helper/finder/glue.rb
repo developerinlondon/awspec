@@ -5,7 +5,7 @@ module Awspec::Helper
         glue_client.get_data_catalog_encryption_settings({
           catalog_id: "#{id}",
         })
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           nil
       end
 
@@ -74,13 +74,16 @@ module Awspec::Helper
       end
 
       def delete_table(id, databasename, tablename)
-        puts "delete helper: database is #{databasename} and table is #{tablename}"
+        puts "delete_table helper: database is #{databasename} and table is #{tablename}"
         resp = glue_client.delete_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           name: "#{tablename}"
         })
+        puts "after resp delete_table helper: database is #{databasename} and table is #{tablename} resp is #{resp.inspect}"
+        
         rescue Aws::Glue::Errors::AccessDeniedException => e
+          puts "inside delete_table exception #{e.inspect}"
           false
       end
 
