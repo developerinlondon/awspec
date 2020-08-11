@@ -41,5 +41,9 @@ module Awspec::Type
     def has_update_table_permission?(database:, table:, description:)
       update_table_description(id, database, table, description)
     end
+
+    def has_delete_table_permission?(database:, table::)
+      delete_table_description(id, database, table)
+    end
   end
 end

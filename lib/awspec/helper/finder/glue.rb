@@ -72,6 +72,17 @@ module Awspec::Helper
         rescue Aws::Glue::Errors::AccessDenied => e
           false
       end
+
+      def delete_table(id, databasename, tablename)
+        resp = glue_client.update_table({
+          catalog_id: "#{id}",
+          database_name: "#{databasename}", # required
+          tables_to_delete: ["#{tablename}"]
+        })
+        rescue Aws::Glue::Errors::AccessDenied => e
+          false
+      end
+
     end
   end
 end
