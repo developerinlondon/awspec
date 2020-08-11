@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_delete_table_permission do
   match do |glue|
-    glue.has_delete_table_permission?(database: @database, table: @table, description: @description)
+    glue.has_delete_table_permission?(database: @database, table: @table)
   end
 
   chain :on_database do |database|
@@ -11,7 +11,4 @@ RSpec::Matchers.define :have_delete_table_permission do
     @table = table
   end
 
-  chain :with_description do |description|
-    @description = description
-  end
 end
