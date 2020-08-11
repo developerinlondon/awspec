@@ -11,7 +11,7 @@ RSpec::Matchers.define :have_update_table_permission do
     @table = table
   end
 
-  chain :with_description do |description|
+  chain :with_new_description do |description|
     @description = description
   end
 end
