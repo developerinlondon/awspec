@@ -47,5 +47,9 @@ module Awspec::Type
       puts "type: database is #{database} and table is #{table}"
       delete_table(id, database, table)
     end
+
+    def has_create_table_partition_permission(database:, table:, partition:)
+      create_table_partition(id, database, table, partition)
+    end
   end
 end
