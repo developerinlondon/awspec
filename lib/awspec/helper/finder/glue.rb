@@ -74,7 +74,7 @@ module Awspec::Helper
       end
 
       def delete_table(id, databasename, tablename)
-      puts "delete helper: database is #{databasename} and table is #{tablename}"
+        puts "delete helper: database is #{databasename} and table is #{tablename}"
         resp = glue_client.delete_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required

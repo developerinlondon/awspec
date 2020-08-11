@@ -43,7 +43,7 @@ module Awspec::Type
       update_table_description(id, database, table, description)
     end
 
-    def has_nuke_table_permission?(database:, table:)
+    def has_delete_table_permission?(database:, table:)
       puts "type: database is #{database} and table is #{table}"
       delete_table(id, database, table)
     end
