@@ -92,7 +92,7 @@ module Awspec::Helper
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}", # required
-            #description: "DescriptionString",
+            description: "Updated Description"
             #owner: "NameString",
             # last_access_time: Time.now,
             # last_analyzed_time: Time.now,
@@ -113,11 +113,11 @@ module Awspec::Helper
             # parameters: {
             #   "KeyString" => "ParametersMapValue",
             # },
-            target_table: {
-              catalog_id: "#{id}",
-              database_name: "#{databasename}",
-              name: "#{newtablename}",
-            }
+            # target_table: {
+            #   catalog_id: "#{id}",
+            #   database_name: "#{databasename}",
+            #   name: "#{newtablename}",
+            # }
           },
         })
 
