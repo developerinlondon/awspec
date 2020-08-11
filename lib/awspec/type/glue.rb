@@ -48,7 +48,7 @@ module Awspec::Type
       delete_table(id, database, table)
     end
 
-    def has_create_table_partition_permission(database:, table:, partition:)
+    def has_create_table_partition_permission?(database:, table:, partition:)
       create_table_partition(id, database, table, partition)
     end
   end
