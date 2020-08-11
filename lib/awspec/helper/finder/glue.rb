@@ -14,7 +14,7 @@ module Awspec::Helper
           catalog_id: "#{id}"
         })
         resp.database_list.count
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::ServiceError => e
           false
       end
 

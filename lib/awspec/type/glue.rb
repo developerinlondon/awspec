@@ -43,7 +43,7 @@ module Awspec::Type
     end
 
     def has_delete_table_permission?(database:, table:)
-      delete_table_description(id, database, table)
+      delete_table(id, database, table)
     end
   end
 end
