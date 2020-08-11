@@ -52,9 +52,9 @@ module Awspec::Helper
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
-            name: "#{tablename}"
+            name: "#{tablename}",
             description: "#{description}"
-          },
+          }
         })
         rescue Aws::Glue::Errors::AccessDenied => e
           false
@@ -67,7 +67,7 @@ module Awspec::Helper
           table_input: { # required
             name: "#{tablename}", # required
             description: "#{description}"
-          },
+          }
         })
         rescue Aws::Glue::Errors::AccessDenied => e
           false
