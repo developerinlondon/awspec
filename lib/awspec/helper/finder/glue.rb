@@ -5,7 +5,7 @@ module Awspec::Helper
         glue_client.get_data_catalog_encryption_settings({
           catalog_id: "#{id}",
         })
-        rescue Aws::Glue::Errors::ServiceError => e
+        rescue Aws::Glue::Errors::AccessDenied => e
           nil
       end
 
@@ -14,7 +14,7 @@ module Awspec::Helper
           catalog_id: "#{id}"
         })
         resp.database_list.count
-        rescue Aws::Glue::Errors::ServiceError => e
+        rescue Aws::Glue::Errors::AccessDenied => e
           false
       end
 
@@ -23,7 +23,7 @@ module Awspec::Helper
           catalog_id: "#{id}",
           name: "#{name}"
         })
-        rescue Aws::Glue::Errors::ServiceError => e
+        rescue Aws::Glue::Errors::AccessDenied => e
           false
       end
 
@@ -33,7 +33,7 @@ module Awspec::Helper
           database_name: "#{databasename}"
         })
         resp.table_list.count
-        rescue Aws::Glue::Errors::ServiceError => e
+        rescue Aws::Glue::Errors::AccessDenied => e
           false
       end
 
@@ -43,86 +43,34 @@ module Awspec::Helper
           database_name: "#{databasename}",
           name: "#{tablename}"
         })
-        rescue Aws::Glue::Errors::ServiceError => e
+        rescue Aws::Glue::Errors::AccessDenied => e
           false
       end
 
-      def create_table(id, databasename, tablename)
+      def create_table(id, databasename, tablename, description = "")
         resp = glue_client.create_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
-            name: "#{tablename}"#, # required
-            #description: "DescriptionString",
-            #owner: "NameString",
-            # last_access_time: Time.now,
-            # last_analyzed_time: Time.now,
-            # retention: 1,
-            # partition_keys: [
-            #   {
-            #     name: "NameString", # required
-            #     type: "ColumnTypeString",
-            #     comment: "CommentString",
-            #     parameters: {
-            #       "KeyString" => "ParametersMapValue",
-            #     },
-            #   },
-            # ],
-            # view_original_text: "ViewTextString",
-            # view_expanded_text: "ViewTextString",
-            # table_type: "TableTypeString",
-            # parameters: {
-            #   "KeyString" => "ParametersMapValue",
-            # },
-            # target_table: {
-            #   catalog_id: "#{id}",
-            #   database_name: "#{databasename}",
-            #   name: "#{tablename}",
-            # },
+            name: "#{tablename}"
+            description: "#{description}"
           },
         })
-
-        # rescue Aws::Glue::Errors::ServiceError => e
-        #   false
+        rescue Aws::Glue::Errors::AccessDenied => e
+          false
       end
 
-      def update_table(id, databasename, tablename, newtablename)
+      def update_table_description(id, databasename, tablename, description)
         resp = glue_client.update_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}", # required
-            description: "Updated Description"
-            #owner: "NameString",
-            # last_access_time: Time.now,
-            # last_analyzed_time: Time.now,
-            # retention: 1,
-            # partition_keys: [
-            #   {
-            #     name: "NameString", # required
-            #     type: "ColumnTypeString",
-            #     comment: "CommentString",
-            #     parameters: {
-            #       "KeyString" => "ParametersMapValue",
-            #     },
-            #   },
-            # ],
-            # view_original_text: "ViewTextString",
-            # view_expanded_text: "ViewTextString",
-            # table_type: "TableTypeString",
-            # parameters: {
-            #   "KeyString" => "ParametersMapValue",
-            # },
-            # target_table: {
-            #   catalog_id: "#{id}",
-            #   database_name: "#{databasename}",
-            #   name: "#{newtablename}",
-            # }
+            description: "#{description}"
           },
         })
-
-        # rescue Aws::Glue::Errors::ServiceError => e
-        #   false
+        rescue Aws::Glue::Errors::AccessDenied => e
+          false
       end
     end
   end

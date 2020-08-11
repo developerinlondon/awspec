@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_update_table_permission do
   match do |glue|
-    glue.has_update_table_permission?(database: @database, table: @table, new_table: @newtable)
+    glue.has_update_table_permission?(database: @database, table: @table, description: @description)
   end
 
   chain :on_database do |database|
@@ -11,7 +11,7 @@ RSpec::Matchers.define :have_update_table_permission do
     @table = table
   end
 
-  chain :with_new_name do |table|
-    @newtable = table
+  chain :with_description do |description|
+    @description = description
   end
 end

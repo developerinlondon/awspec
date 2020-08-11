@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_create_table_permission do
   match do |glue|
-    glue.has_create_table_permission?(database: @database, table: @table)
+    glue.has_create_table_permission?(database: @database, table: @table, description: @description)
   end
 
   chain :on_database do |database|
@@ -9,5 +9,9 @@ RSpec::Matchers.define :have_create_table_permission do
 
   chain :for_table do |table|
     @table = table
+  end
+
+  chain :with_description do |description|
+    @description = description
   end
 end
