@@ -14,7 +14,7 @@ module Awspec::Helper
           catalog_id: "#{id}"
         })
         resp.database_list.count
-        rescue Aws::Glue::Errors::ServiceError => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
@@ -23,7 +23,7 @@ module Awspec::Helper
           catalog_id: "#{id}",
           name: "#{name}"
         })
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
@@ -33,7 +33,7 @@ module Awspec::Helper
           database_name: "#{databasename}"
         })
         resp.table_list.count
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
@@ -43,7 +43,7 @@ module Awspec::Helper
           database_name: "#{databasename}",
           name: "#{tablename}"
         })
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
@@ -56,7 +56,7 @@ module Awspec::Helper
             description: "#{description}"
           }
         })
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
@@ -69,7 +69,7 @@ module Awspec::Helper
             description: "#{description}"
           }
         })
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
@@ -79,7 +79,7 @@ module Awspec::Helper
           database_name: "#{databasename}", # required
           name: "#{tablename}"
         })
-        rescue Aws::Glue::Errors::AccessDenied => e
+        rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
 
