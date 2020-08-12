@@ -53,22 +53,23 @@ module Awspec::Helper
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}",
-            description: "#{description}"
-          },
-          storage_descriptor: {
-            location: 's3://aws-dub-s3-0097-outputtz001-dev/sen/dataengdevtestsentz001/test/tables/001',
-            columns: [
-              {
-                name: "test1" # required
-              },
-            ],
-            sort_columns: [
-              {
-                column: "test1", # required
-                sort_order: 1, # required
-              },
-            ]
+            description: "#{description}",
+            storage_descriptor: {
+              location: 's3://aws-dub-s3-0097-outputtz001-dev/sen/dataengdevtestsentz001/test/tables/001',
+              columns: [
+                {
+                  name: "test1" # required
+                },
+              ],
+              sort_columns: [
+                {
+                  column: "test1", # required
+                  sort_order: 1, # required
+                },
+              ]
+            }
           }
+
         })
         rescue Aws::Glue::Errors::AccessDeniedException => e
           false
