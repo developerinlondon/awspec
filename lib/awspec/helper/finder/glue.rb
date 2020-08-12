@@ -90,11 +90,11 @@ module Awspec::Helper
       def create_table_partition(id, databasename, tablename, partitionname)
         puts "delete_table helper: database is #{databasename} and table is #{tablename} and partition name is #{partitionname}"
         resp = glue_client.create_partition({
-          values: ["testvalue"],
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_name: "#{tablename}", # required
           partition_input: { # required
+            values: ["testvalue"],
             storage_descriptor: {
               columns: [
                 {
