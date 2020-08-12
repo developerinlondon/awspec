@@ -57,7 +57,7 @@ module Awspec::Helper
       end
 
       def delete_object(id, key)
-        res = s3_client.put_object({
+        res = s3_client.delete_object({
                                       bucket: id,
                                       key: key
                                     })
