@@ -96,6 +96,7 @@ module Awspec::Helper
           partition_input: { # required
             values: ["testvalue"],
             storage_descriptor: {
+              location: 's3://aws-dub-s3-0097-outputtz001-dev/sen/dataengdevtestsentz001/test/tables/001'
               columns: [
                 {
                   name: "#{partitionname}" # required
