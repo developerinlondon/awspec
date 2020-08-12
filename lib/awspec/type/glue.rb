@@ -35,7 +35,6 @@ module Awspec::Type
     end
 
     def has_create_table_permission?(database:, table:, description:)
-      puts "CT type: database is #{database} and table is #{table}"
       create_table(id, database, table, description)
     end
 
@@ -44,7 +43,6 @@ module Awspec::Type
     end
 
     def has_delete_table_permission?(database:, table:)
-      puts "type: database is #{database} and table is #{table}"
       delete_table(id, database, table)
     end
 
