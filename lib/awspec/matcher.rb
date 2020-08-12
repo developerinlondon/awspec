@@ -94,5 +94,3 @@ require 'awspec/matcher/have_get_tables_permission'
 require 'awspec/matcher/have_create_table_permission'
 require 'awspec/matcher/have_delete_table_permission'
 require 'awspec/matcher/have_update_table_permission'
-
-require 'awspec/matcher/have_create_table_partition_permission'
