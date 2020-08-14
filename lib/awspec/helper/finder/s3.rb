@@ -9,8 +9,8 @@ module Awspec::Helper
 
       def find_bucket_acl(id)
         s3_client.get_bucket_acl(bucket: id)
-      rescue Aws::S3::Errors::ServiceError
-        nil
+      # rescue Aws::S3::Errors::ServiceError
+      #   nil
       end
 
       def head_object(id, key)
@@ -19,8 +19,8 @@ module Awspec::Helper
                                       key: key.sub(%r(\A/), '')
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-      rescue Aws::S3::Errors::NotFound
-        false
+      # rescue Aws::S3::Errors::NotFound
+      #   false
       end
 
       def get_object(id, key)
