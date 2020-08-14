@@ -11,6 +11,7 @@ module Awspec
         client_backoff: 0.0,
         client_backoff_limit: 30.0,
         client_iteration: 1
+        debug_mode: false
       }
     end
 
