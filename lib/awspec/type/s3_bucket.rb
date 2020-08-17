@@ -11,7 +11,7 @@ module Awspec::Type
     end
 
     def has_object?(key)
-      check_existence
+      #check_existence
       head_object(id, key)
     end
 

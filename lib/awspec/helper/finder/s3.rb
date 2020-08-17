@@ -11,7 +11,6 @@ module Awspec::Helper
         s3_client.get_bucket_acl(bucket: id)
       rescue Aws::S3::Errors::ServiceError => e
         if s3_client.debug_mode
-          puts 'Entering Debug Mode'
           throw e
         else
           return nil
@@ -31,7 +30,6 @@ module Awspec::Helper
         res.data.class == Aws::S3::Types::HeadObjectOutput
         rescue Aws::S3::Errors::NotFound => e
           if s3_client.debug_mode
-            puts 'Entering Debug Mode'
             throw e
           else
             return false
