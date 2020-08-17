@@ -19,6 +19,10 @@ module Awspec::Helper
       @symbol2 = real_client.class.to_s.split('::').shift(2).push('Errors', 'Throttling').join('::').to_sym
     end
 
+    def debug_mode
+      @debug_mode
+    end
+
     protected
 
     # used to capture only the "RequestLimitExceeded" error from an aws
@@ -41,10 +45,6 @@ module Awspec::Helper
       reset_backoff
 
       results
-    end
-
-    def debug_mode
-      @debug_mode
     end
 
     def reset_backoff
