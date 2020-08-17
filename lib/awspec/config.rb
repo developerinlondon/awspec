@@ -27,6 +27,10 @@ module Awspec
       @config[:client_iteration] = iteration
     end
 
+    def debug_mode(debug_mode)
+      @config[:debug_mode] = debug_mode
+    end
+
     def [](key)
       @config.fetch(key)
     end
