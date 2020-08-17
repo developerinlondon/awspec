@@ -48,19 +48,19 @@ module Awspec::Helper
           end
       end
 
-      # def get_object(id, key)
-      #   res = s3_client.head_object({
-      #                                 bucket: id,
-      #                                 key: key
-      #                               })
-      #   res.data.class == Aws::S3::Types::HeadObjectOutput
-      #   rescue Aws::S3::Errors::NotFound => e
-      #     if s3_client.debug_mode
-      #       puts "bucket: #{id} with key #{key} not found."
-      #     else
-      #       return false
-      #     end
-      # end
+      def get_object(id, key)
+        res = s3_client.head_object({
+                                      bucket: id,
+                                      key: key
+                                    })
+        res.data.class == Aws::S3::Types::HeadObjectOutput
+        rescue Aws::S3::Errors::NotFound => e
+          if s3_client.debug_mode
+            puts "bucket: #{id} with key #{key} not found."
+          else
+            return false
+          end
+      end
 
       def put_object(id, key, body, server_side_encryption)
         res = s3_client.put_object({
