@@ -11,6 +11,7 @@ module Awspec::Helper
         s3_client.get_bucket_acl(bucket: id)
       rescue Aws::S3::Errors::ServiceError => e
         if s3_client.debug_mode
+          puts 'Entering Debug Mode'
           throw e
         else
           nil
@@ -22,8 +23,12 @@ module Awspec::Helper
                                       key: key.sub(%r(\A/), '')
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-      # rescue Aws::S3::Errors::NotFound
-      #   false
+        rescue Aws::S3::Errors::NotFound
+          if s3_client.debug_mode
+            puts 'Entering Debug Mode'
+            throw e
+          else
+            false
       end
 
       def get_object(id, key)
@@ -32,8 +37,12 @@ module Awspec::Helper
                                       key: key
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-      rescue Aws::S3::Errors::NotFound
-        false
+        rescue Aws::S3::Errors::NotFound
+          if s3_client.debug_mode
+            puts 'Entering Debug Mode'
+            throw e
+          else
+            false
       end
 
       def put_object(id, key, body, server_side_encryption)
