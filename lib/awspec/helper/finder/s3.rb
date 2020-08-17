@@ -12,7 +12,7 @@ module Awspec::Helper
         reutrn id if res.data.class == Aws::S3::Types::HeadObjectOutput
         rescue Aws::S3::Errors::NotFound => e
          if s3_client.debug_mode
-            puts 'AWSPEC: Bucket Not Found'
+            puts "AWSPEC: #{e.inspect}"
           else
             return false
           end
