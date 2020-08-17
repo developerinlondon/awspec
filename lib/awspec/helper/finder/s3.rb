@@ -14,7 +14,8 @@ module Awspec::Helper
           puts 'Entering Debug Mode'
           throw e
         else
-          nil
+          return nil
+        end
       end
 
       def head_object(id, key)
@@ -23,12 +24,13 @@ module Awspec::Helper
                                       key: key.sub(%r(\A/), '')
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-        rescue Aws::S3::Errors::NotFound
+        rescue Aws::S3::Errors::NotFound => e
           if s3_client.debug_mode
             puts 'Entering Debug Mode'
             throw e
           else
-            false
+            return false
+          end
       end
 
       def get_object(id, key)
@@ -37,12 +39,13 @@ module Awspec::Helper
                                       key: key
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-        rescue Aws::S3::Errors::NotFound
+        rescue Aws::S3::Errors::NotFound => e
           if s3_client.debug_mode
             puts 'Entering Debug Mode'
             throw e
           else
-            false
+            return false
+          end
       end
 
       def put_object(id, key, body, server_side_encryption)
