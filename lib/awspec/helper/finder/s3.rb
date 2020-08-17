@@ -10,12 +10,18 @@ module Awspec::Helper
                                       key: '/'
                                     })
         reutrn id if res.data.class == Aws::S3::Types::HeadObjectOutput
-        rescue Aws::S3::Errors::ServiceError => e
-          if s3_client.debug_mode
-            throw e
+        rescue Aws::S3::Errors::NotFound => e
+         if s3_client.debug_mode
+            puts 'AWSPEC: Bucket Not Found'
           else
             return false
           end
+        # rescue Aws::S3::Errors::ServiceError => e
+        #   if s3_client.debug_mode
+        #     throw e
+        #   else
+        #     return false
+        #   end
       end
 
       def find_bucket_acl(id)
