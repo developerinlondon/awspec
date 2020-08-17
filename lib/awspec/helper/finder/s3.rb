@@ -7,14 +7,14 @@ module Awspec::Helper
         # end
         res = s3_client.head_object({
                                       bucket: id,
-                                      key: ''
+                                      key: '/'
                                     })
         reutrn id if res.data.class == Aws::S3::Types::HeadObjectOutput
         rescue Aws::S3::Errors::ServiceError => e
           if s3_client.debug_mode
             throw e
           else
-            return nil
+            return false
           end
       end
 
