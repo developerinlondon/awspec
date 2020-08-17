@@ -23,6 +23,11 @@ module Awspec::Helper
                                       bucket: id,
                                       key: key.sub(%r(\A/), '')
                                     })
+        if s3_client.debug_mode
+          puts "*** debug mode #{res}"
+        else
+          puts "*** Not debug mode"
+        end
         res.data.class == Aws::S3::Types::HeadObjectOutput
         rescue Aws::S3::Errors::NotFound => e
           if s3_client.debug_mode
