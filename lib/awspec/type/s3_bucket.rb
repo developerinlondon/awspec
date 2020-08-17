@@ -59,7 +59,7 @@ module Awspec::Type
     end
 
     def has_get_object_permission?(key)
-     get_object(id, key)
+     head_object(id, key)
     end
 
     def has_put_object_permission?(s3_file:,local_file:, server_side_encryption: nil)
