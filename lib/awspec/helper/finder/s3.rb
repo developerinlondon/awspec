@@ -9,8 +9,11 @@ module Awspec::Helper
 
       def find_bucket_acl(id)
         s3_client.get_bucket_acl(bucket: id)
-      # rescue Aws::S3::Errors::ServiceError
-      #   nil
+      rescue Aws::S3::Errors::ServiceError => e
+        if s3_client.debug_mode
+          throw e
+        else
+          nil
       end
 
       def head_object(id, key)

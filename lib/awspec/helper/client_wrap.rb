@@ -9,6 +9,7 @@ module Awspec::Helper
       @client        = real_client
       @backoff       = config[:client_backoff]
       @orig_backoff  = @backoff
+      @debug_mode    = config[:debug_mode]
       @iteration     = config[:client_iteration]
       @orig_iter     = @iteration
       @backoff_limit = config[:client_backoff_limit]
@@ -40,6 +41,10 @@ module Awspec::Helper
       reset_backoff
 
       results
+    end
+
+    def debug_mode
+      @debug_mode
     end
 
     def reset_backoff
