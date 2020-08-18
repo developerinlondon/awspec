@@ -7,11 +7,10 @@ module Awspec::Type
     end
 
     def id
-      @id ||= @display_name #if resource_via_client
+      @id ||= @display_name
     end
 
     def has_object?(key)
-      #check_existence
       head_object(id, key)
     end
 

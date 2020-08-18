@@ -2,26 +2,13 @@ module Awspec::Helper
   module Finder
     module S3
       def find_bucket(id)
-        # s3_client.list_buckets[:buckets].find do |bucket|
-        #   bucket.name == id
-        # end
         res = s3_client.head_object({
                                       bucket: id,
                                       key: '/'
                                     })
         reutrn id if res.data.class == Aws::S3::Types::HeadObjectOutput
         rescue Aws::S3::Errors::NotFound => e
-         if s3_client.debug_mode
-            puts "AWSPEC: #{e.inspect}"
-          else
-            return false
-          end
-        # rescue Aws::S3::Errors::ServiceError => e
-        #   if s3_client.debug_mode
-        #     throw e
-        #   else
-        #     return false
-        #   end
+          return false
       end
 
       def find_bucket_acl(id)
