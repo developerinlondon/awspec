@@ -15,6 +15,7 @@ require 'awspec/helper/finder/autoscaling'
 require 'awspec/helper/finder/ebs'
 require 'awspec/helper/finder/elb'
 require 'awspec/helper/finder/firehose'
+require 'awspec/helper/finder/glue'
 require 'awspec/helper/finder/lambda'
 require 'awspec/helper/finder/iam'
 require 'awspec/helper/finder/kms'
@@ -73,6 +74,7 @@ module Awspec::Helper
     include Awspec::Helper::Finder::Autoscaling
     include Awspec::Helper::Finder::Ebs
     include Awspec::Helper::Finder::Elb
+    include Awspec::Helper::Finder::Glue
     include Awspec::Helper::Finder::Lambda
     include Awspec::Helper::Finder::Iam
     include Awspec::Helper::Finder::Kms
@@ -119,6 +121,7 @@ module Awspec::Helper
       rds_client: Aws::RDS::Client,
       route53_client: Aws::Route53::Client,
       s3_client: Aws::S3::Client,
+      glue_client: Aws::Glue::Client,
       autoscaling_client: Aws::AutoScaling::Client,
       elb_client: Aws::ElasticLoadBalancing::Client,
       elbv2_client: Aws::ElasticLoadBalancingV2::Client,
@@ -158,6 +161,7 @@ module Awspec::Helper
       cognito_identity_client: Aws::CognitoIdentity::Client,
       cognito_identity_provider_client: Aws::CognitoIdentityProvider::Client
     }
+
 
     CLIENT_OPTIONS = {
       http_proxy: ENV['http_proxy'] || ENV['https_proxy'] || nil

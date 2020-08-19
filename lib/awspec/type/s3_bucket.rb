@@ -7,11 +7,10 @@ module Awspec::Type
     end
 
     def id
-      @id ||= @display_name if resource_via_client
+      @id ||= @display_name
     end
 
     def has_object?(key)
-      check_existence
       head_object(id, key)
     end
 
@@ -54,11 +53,7 @@ module Awspec::Type
       cors_rules.count
     end
 
-    def has_list_bucket_permission?()
-      return list_bucket(id)
-    end
-
-    def has_list_bucket_permission_with_prefix?(prefix)
+    def has_list_bucket_permission?(prefix=nil)
       return list_bucket(id, prefix)
     end
 
@@ -66,8 +61,16 @@ module Awspec::Type
      get_object(id, key)
     end
 
-    def has_put_object_permission?(key:,body:, server_side_encryption: 'AES256')
-      put_object(id, key, body, server_side_encryption)
+    def has_put_object_permission?(s3_file:,local_file:, server_side_encryption: nil)
+      put_object(id, s3_file, local_file, server_side_encryption)
+    end
+
+    def has_put_prefix_permission?(s3_prefix:, server_side_encryption: nil)
+      put_prefix(id, s3_prefix, server_side_encryption)
+    end
+
+    def has_delete_object_permission?(filename)
+      delete_object(id, filename)
     end
 
     def has_policy?(policy)

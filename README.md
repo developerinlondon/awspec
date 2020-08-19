@@ -8,6 +8,7 @@ RSpec tests for your AWS resources.
 
 [Resource Types](doc/resource_types.md) | [Contributing](doc/contributing.md)
 
+
 ## Installation
 
 Add this line to your application's Gemfile:

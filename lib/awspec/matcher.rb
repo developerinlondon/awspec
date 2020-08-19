@@ -85,4 +85,12 @@ require 'awspec/matcher/have_env_var'
 require 'awspec/matcher/have_env_var_value'
 
 # S3
-#require 'awspec/matcher/with_prefix'
+require 'awspec/matcher/have_list_bucket_permission'
+
+# glue
+require 'awspec/matcher/have_get_database_permission'
+require 'awspec/matcher/have_get_table_permission'
+require 'awspec/matcher/have_get_tables_permission'
+require 'awspec/matcher/have_create_table_permission'
+require 'awspec/matcher/have_delete_table_permission'
+require 'awspec/matcher/have_update_table_permission'

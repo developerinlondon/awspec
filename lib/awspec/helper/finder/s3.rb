@@ -2,15 +2,23 @@ module Awspec::Helper
   module Finder
     module S3
       def find_bucket(id)
-        s3_client.list_buckets[:buckets].find do |bucket|
-          bucket.name == id
-        end
+        res = s3_client.head_object({
+                                      bucket: id,
+                                      key: '/'
+                                    })
+        reutrn id if res.data.class == Aws::S3::Types::HeadObjectOutput
+        rescue Aws::S3::Errors::NotFound => e
+          return false
       end
 
       def find_bucket_acl(id)
         s3_client.get_bucket_acl(bucket: id)
-      rescue Aws::S3::Errors::ServiceError
-        nil
+        rescue Aws::S3::Errors::ServiceError => e
+          if s3_client.debug_mode
+            throw e
+          else
+            return nil
+          end
       end
 
       def head_object(id, key)
@@ -19,8 +27,12 @@ module Awspec::Helper
                                       key: key.sub(%r(\A/), '')
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-      rescue Aws::S3::Errors::NotFound
-        false
+        rescue Aws::S3::Errors::NotFound => e
+          if s3_client.debug_mode
+            puts "bucket: #{id} with key #{key} not found."
+          else
+            return false
+          end
       end
 
       def get_object(id, key)
@@ -29,20 +41,45 @@ module Awspec::Helper
                                       key: key
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-      rescue Aws::S3::Errors::NotFound
-        false
+        rescue Aws::S3::Errors::NotFound => e
+          if s3_client.debug_mode
+            puts "bucket: #{id} with key #{key} not found."
+          else
+            return false
+          end
       end
 
       def put_object(id, key, body, server_side_encryption)
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
-                                      #server_side_encryption: server_side_encryption,
+                                      server_side_encryption: server_side_encryption,
                                       body: body
                                     })
-      #  res.data.class == Aws::S3::Types::PutObjectOutput
-      # rescue Aws::S3::Errors::ServiceError
-      #   false
+        rescue Aws::S3::Errors::AccessDenied => e
+          puts "error: #{e.inspect}"
+          false
+      end
+
+      def put_prefix(id, key, server_side_encryption)
+        res = s3_client.put_object({
+                                      bucket: id,
+                                      key: key,
+                                      server_side_encryption: server_side_encryption
+                                    })
+        rescue Aws::S3::Errors::AccessDenied => e
+          puts "error: #{e.inspect}"
+          false
+      end
+
+      def delete_object(id, key)
+        res = s3_client.delete_object({
+                                      bucket: id,
+                                      key: key
+                                    })
+        rescue Aws::S3::Errors::AccessDenied => e
+          puts "error: #{e.inspect}"
+          false
       end
 
       def list_bucket(id, prefix=nil)
