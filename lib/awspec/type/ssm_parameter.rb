@@ -23,12 +23,12 @@ module Awspec::Type
       tag
     end
 
-    def has_get_ssm_parameter_permission?(name)
-      get_ssm_parameter(name)
+    def has_get_ssm_parameter_permission?
+      get_ssm_parameter(id)
     end
 
-    def has_describe_ssm_parameter_permission?(name)
-      find_ssm_parameter(name)
+    def has_describe_ssm_parameter_permission?
+      find_ssm_parameter(id)
     end
 
   end
