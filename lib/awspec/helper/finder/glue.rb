@@ -55,11 +55,64 @@ module Awspec::Helper
             name: "#{tablename}",
             description: "#{description}"
           },
-
+          storage_descriptor: {
+            columns: [
+                {
+                    name: "col1_test",
+                    type: "string"
+                },
+                {
+                    name: "col2_test",
+                    type: "bigint"
+                },
+            ]
+          },
+          partition_keys: [
+            {
+                name: "col11_test",
+                type: "date"
+            },
+            {
+                name: "col12_test",
+                type: "string"
+            }
+          ]
         })
         rescue Aws::Glue::Errors::AccessDeniedException => e
           false
       end
+
+      # def create_partition(id, databasename, tablename)
+      #   resp = glue_client.create_partition({
+      #     catalog_id: "#{id}",
+      #     database_name: "#{databasename}",
+      #     table_name: "#{tablename}",
+      #     partition_input: {
+      #       storage_descriptor: {
+      #         columns: [
+      #             {
+      #                 name: "col1_test",
+      #                 type: "string"
+      #             },
+      #             {
+      #                 name: "col2_test",
+      #                 type: "bigint"
+      #             },
+      #         ]
+      #       },
+      #       partition_keys: [
+      #         {
+      #             name: "col11_test",
+      #             type: "date"
+      #         },
+      #         {
+      #             name: "col12_test",
+      #             type: "string"
+      #         }
+      #       ],
+      #     }
+      #   })
+      # end
 
       def update_table_description(id, databasename, tablename, description)
         resp = glue_client.update_table({
