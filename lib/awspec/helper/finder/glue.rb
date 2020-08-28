@@ -53,30 +53,31 @@ module Awspec::Helper
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}",
-            description: "#{description}"
-          },
-          storage_descriptor: {
-            columns: [
-                {
-                    name: "col1_test",
-                    type: "string"
-                },
-                {
-                    name: "col2_test",
-                    type: "bigint"
-                },
+            description: "#{description}",
+            storage_descriptor: {
+              columns: [
+                  {
+                      name: "col1_test",
+                      type: "string"
+                  },
+                  {
+                      name: "col2_test",
+                      type: "bigint"
+                  },
+              ]
+            },
+            partition_keys: [
+              {
+                  name: "col11_test",
+                  type: "date"
+              },
+              {
+                  name: "col12_test",
+                  type: "string"
+              }
             ]
           },
-          partition_keys: [
-            {
-                name: "col11_test",
-                type: "date"
-            },
-            {
-                name: "col12_test",
-                type: "string"
-            }
-          ]
+
         })
         rescue Aws::Glue::Errors::AccessDeniedException => e
           false
