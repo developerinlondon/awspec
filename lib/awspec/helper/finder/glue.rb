@@ -47,13 +47,17 @@ module Awspec::Helper
           false
       end
 
-      def create_table(id, databasename, tablename, description = "")
+      def create_table(id, databasename, tablename, description = "", columns = [], partition_keys = [])
         resp = glue_client.create_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}",
-            description: "#{description}"
+            description: "#{description}",
+            storage_descriptor: {
+              columns: columns
+            },
+            partition_keys: partition_keys
           },
 
         })
@@ -61,13 +65,17 @@ module Awspec::Helper
           false
       end
 
-      def update_table_description(id, databasename, tablename, description)
+      def update_table_description(id, databasename, tablename, description, columns = [], partition_keys = [])
         resp = glue_client.update_table({
           catalog_id: "#{id}",
           database_name: "#{databasename}", # required
           table_input: { # required
             name: "#{tablename}", # required
-            description: "#{description}"
+            description: "#{description}",
+            storage_descriptor: {
+              columns: columns
+            },
+            partition_keys: partition_keys
           }
         })
         rescue Aws::Glue::Errors::AccessDeniedException => e

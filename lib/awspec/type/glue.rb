@@ -34,12 +34,12 @@ module Awspec::Type
       get_table(id, database, table)
     end
 
-    def has_create_table_permission?(database:, table:, description:)
-      create_table(id, database, table, description)
+    def has_create_table_permission?(database:, table:, description:, columns:, partition_keys:)
+      create_table(id, database, table, description, columns, partition_keys)
     end
 
-    def has_update_table_permission?(database:, table:, description:)
-      update_table_description(id, database, table, description)
+    def has_update_table_permission?(database:, table:, description:, columns:, partition_keys:)
+      update_table_description(id, database, table, description, columns, partition_keys)
     end
 
     def has_delete_table_permission?(database:, table:)
