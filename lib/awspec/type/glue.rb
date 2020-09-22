@@ -22,6 +22,14 @@ module Awspec::Type
       get_databases(id)
     end
 
+    def has_create_database_permission?(database:)
+      create_database(id, database)
+    end
+
+    def has_delete_database_permission?(database:)
+      delete_database(id, database)
+    end
+
     def has_get_database_permission?(database:)
       get_database(id, database)
     end

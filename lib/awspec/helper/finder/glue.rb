@@ -47,6 +47,27 @@ module Awspec::Helper
           false
       end
 
+      def delete_database(id, databasename)
+        glue_client.delete_database({
+          catalog_id: "#{id}",
+          name: "#{databasename}"
+        })
+        rescue Aws::Glue::Errors::AccessDeniedException => e
+          false
+      end
+
+      def create_database(id, databasename, description = "")
+        resp = glue_client.create_database({
+          catalog_id: "#{id}",
+          database_input: { # required
+            name: "#{databasename}", # required
+            description: "#{description}"
+          },
+        })
+        rescue Aws::Glue::Errors::AccessDeniedException => e
+          false
+      end
+
       def create_table(id, databasename, tablename, description = "", columns = [], partition_keys = [])
         resp = glue_client.create_table({
           catalog_id: "#{id}",
