@@ -61,6 +61,26 @@ module Awspec::Helper
           false
       end
 
+      def put_object_encrypted(id, key, body, kms_key_id)
+ 
+        s3_encryption_client = Aws::S3::EncryptionV2::Client.new(
+          kms_key_id: kms_key_id,
+          key_wrap_schema: :kms_context,
+          content_encryption_schema: :aes_gcm_no_padding,
+          security_profile: :v2
+        )
+
+        res = s3_encryption_client.put_object(
+          bucket: id,
+          key: key,
+          body: body
+        )
+
+        rescue StandardError => e
+          puts "Error uploading object: #{e.message}"
+          return false
+      end
+
       def put_prefix(id, key, server_side_encryption)
         res = s3_client.put_object({
                                       bucket: id,
