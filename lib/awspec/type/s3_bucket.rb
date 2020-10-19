@@ -61,8 +61,8 @@ module Awspec::Type
      get_object(id, key)
     end
 
-    def has_put_object_permission?(s3_file:,local_file:, server_side_encryption: nil)
-      put_object(id, s3_file, local_file, server_side_encryption)
+    def has_put_object_permission?(s3_file:, local_file:, server_side_encryption: nil, ssekms_key_id: nil)
+      put_object(id, s3_file, local_file, server_side_encryption, ssekms_key_id)
     end
 
     def has_put_prefix_permission?(s3_prefix:, server_side_encryption: nil)

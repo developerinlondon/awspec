@@ -49,15 +49,15 @@ module Awspec::Helper
           end
       end
 
-      def put_object(id, key, body, server_side_encryption)
+      def put_object(id, key, body, server_side_encryption, ssekms_key_id)
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
+                                      ssekms_key_id: ssekms_key_id,
                                       body: body
                                     })
         rescue Aws::S3::Errors::AccessDenied => e
-          puts "error: #{e.inspect}"
           false
       end
 
@@ -68,7 +68,6 @@ module Awspec::Helper
                                       server_side_encryption: server_side_encryption
                                     })
         rescue Aws::S3::Errors::AccessDenied => e
-          puts "error: #{e.inspect}"
           false
       end
 
@@ -78,7 +77,6 @@ module Awspec::Helper
                                       key: key
                                     })
         rescue Aws::S3::Errors::AccessDenied => e
-          puts "error: #{e.inspect}"
           false
       end
 
