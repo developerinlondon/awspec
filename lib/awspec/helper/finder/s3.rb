@@ -61,11 +61,12 @@ module Awspec::Helper
           false
       end
 
-      def put_prefix(id, key, server_side_encryption)
+      def put_prefix(id, key, server_side_encryption, ssekms_key_id)
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
-                                      server_side_encryption: server_side_encryption
+                                      server_side_encryption: server_side_encryption,
+                                      ssekms_key_id: ssekms_key_id
                                     })
         rescue Aws::S3::Errors::AccessDenied => e
           false
