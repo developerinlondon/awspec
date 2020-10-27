@@ -47,6 +47,12 @@ module Awspec::Helper
           else
             return false
           end
+        rescue Aws::S3::Errors::Forbidden => e
+          if s3_client.debug_mode
+            puts "bucket: #{id} with key #{key} is forbidden."
+          else
+            return false
+          end
       end
 
       def put_object(id, key, body, server_side_encryption)
