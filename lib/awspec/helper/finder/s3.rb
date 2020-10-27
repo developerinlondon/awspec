@@ -7,18 +7,14 @@ module Awspec::Helper
                                       key: '/'
                                     })
         reutrn id if res.data.class == Aws::S3::Types::HeadObjectOutput
-        rescue Aws::S3::Errors::NotFound => e
-          return false
+        rescue
+          false
       end
 
       def find_bucket_acl(id)
         s3_client.get_bucket_acl(bucket: id)
-        rescue Aws::S3::Errors::ServiceError => e
-          if s3_client.debug_mode
-            throw e
-          else
-            return nil
-          end
+        rescue
+          nil
       end
 
       def head_object(id, key)
@@ -27,12 +23,8 @@ module Awspec::Helper
                                       key: key.sub(%r(\A/), '')
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-        rescue Aws::S3::Errors::NotFound => e
-          if s3_client.debug_mode
-            puts "bucket: #{id} with key #{key} not found."
-          else
-            return false
-          end
+        rescue
+          false
       end
 
       def get_object(id, key)
@@ -41,12 +33,8 @@ module Awspec::Helper
                                       key: key
                                     })
         res.data.class == Aws::S3::Types::HeadObjectOutput
-        rescue Aws::S3::Errors::NotFound => e
-          if s3_client.debug_mode
-            puts "bucket: #{id} with key #{key} not found."
-          else
-            return false
-          end
+        rescue
+          false
       end
 
       def put_object(id, key, body, server_side_encryption, ssekms_key_id)
@@ -57,7 +45,7 @@ module Awspec::Helper
                                       ssekms_key_id: ssekms_key_id,
                                       body: body
                                     })
-        rescue Aws::S3::Errors::AccessDenied => e
+        rescue
           false
       end
 
@@ -68,7 +56,7 @@ module Awspec::Helper
                                       server_side_encryption: server_side_encryption,
                                       ssekms_key_id: ssekms_key_id
                                     })
-        rescue Aws::S3::Errors::AccessDenied => e
+        rescue
           false
       end
 
@@ -77,7 +65,7 @@ module Awspec::Helper
                                       bucket: id,
                                       key: key
                                     })
-        rescue Aws::S3::Errors::AccessDenied => e
+        rescue
           false
       end
 
@@ -87,19 +75,19 @@ module Awspec::Helper
                                           prefix: prefix
                                         })
         res.data.class == Aws::S3::Types::ListObjectsV2Output
-      rescue Aws::S3::Errors::AccessDenied
+      rescue
         false
       end
 
       def find_bucket_cors(id)
         s3_client.get_bucket_cors(bucket: id)
-      rescue Aws::S3::Errors::ServiceError
+      rescue
         nil
       end
 
       def find_bucket_policy(id)
         s3_client.get_bucket_policy(bucket: id)
-      rescue Aws::S3::Errors::ServiceError
+      rescue
         nil
       end
 
