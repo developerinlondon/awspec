@@ -15,7 +15,8 @@ module Awspec::Type
     def has_key_policy?(policy_name, document = nil)
       res = kms_client.get_key_policy(key_id: id, policy_name: policy_name)
       policy = JSON.parse(URI.decode(res.policy))
-      print("#{policy}")
+      print("Policy is : #{policy}")
+      print("Policy Statement is: #{policy["Statement"]}")
       return JSON.parse(URI.decode(res.policy)) == JSON.parse(document) if document
       res
     end
