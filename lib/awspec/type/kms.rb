@@ -21,12 +21,16 @@ module Awspec::Type
       policy["Statement"].each do |statement|
         if statement["Principal"]["AWS"].kind_of?(Array) then
           statement["Principal"]["AWS"].each do |principal|
-            retval = retval && principal.starts_with?(iam_prefix)
-            print "Principal is #{principal}\n"
+            unless principal.start_with?(iam_prefix) then
+              retval = retval && false
+              print "Invalid Principal #{principal}\n"
+            end
           end
         else
-          retval = retval && statement["Principal"]["AWS"].starts_with?(iam_prefix) 
-          print "Principal is #{statement["Principal"]["AWS"]}\n"
+          unless statement["Principal"]["AWS"].start_with?(iam_prefix) then
+            retval = retval && false
+            print "Invalid Principal #{statement["Principal"]["AWS"]}\n"
+          end
         end
       end
       return retval
