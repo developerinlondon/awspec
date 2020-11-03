@@ -16,8 +16,8 @@ module Awspec::Type
       retval = true
       res = kms_client.get_key_policy(key_id: id, policy_name: 'default')
       policy = JSON.parse(URI.decode(res.policy))
-      print("Policy is : #{policy}")
-      print("Policy Statement is: #{policy["Statement"]}")
+      print("Policy is : #{policy}\n\n")
+      print("Policy Statement is: #{policy["Statement"]}\n\n")
       policy["Statement"].each do |statement|
         if statement["Principal"]["AWS"].kind_of?(Array) then
           statement["Principal"]["AWS"].each do |principal|
