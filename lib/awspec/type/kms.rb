@@ -18,9 +18,10 @@ module Awspec::Type
       print("Policy is : #{policy}")
       print("Policy Statement is: #{policy["Statement"]}")
       policy["Statement"].each do |statement|
-        statement["Principal"]["AWS"].each do |principal|
-          print "Principal is #{principal}\n"
-        end
+        print "Principal is #{statement["Principal"]["AWS"]}\n"
+        # statement["Principal"]["AWS"].each do |principal|
+        #   print "Principal is #{principal}\n"
+        # end
       end
       return true
     end
