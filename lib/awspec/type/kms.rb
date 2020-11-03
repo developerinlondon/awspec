@@ -13,7 +13,7 @@ module Awspec::Type
     end
 
     def has_valid_key_policy?()
-      res = kms_client.get_key_policy(key_id: id, policy_name: policy_name)
+      res = kms_client.get_key_policy(key_id: id, policy_name: 'default')
       policy = JSON.parse(URI.decode(res.policy))
       print("Policy is : #{policy}")
       print("Policy Statement is: #{policy["Statement"]}")
