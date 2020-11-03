@@ -12,24 +12,22 @@ module Awspec::Type
       resource_via_client.enabled
     end
 
-    def has_valid_key_policy?(iam_prefix)
+    def has_valid_key_policy?(iam_regex)
       retval = true
       res = kms_client.get_key_policy(key_id: id, policy_name: 'default')
       policy = JSON.parse(URI.decode(res.policy))
-      print("Policy is : #{policy}\n\n")
-      print("Policy Statement is: #{policy["Statement"]}\n\n")
       policy["Statement"].each do |statement|
         if statement["Principal"]["AWS"].kind_of?(Array) then
           statement["Principal"]["AWS"].each do |principal|
-            unless principal.match(iam_prefix) then
+            unless principal.match(iam_regex) then
               retval = retval && false
-              print "Invalid Principal #{principal}\n"
+              print "Invalid Principal #{principal} in Sid #{statement['Sid']}\n"
             end
           end
         else
-          unless statement["Principal"]["AWS"].match(iam_prefix) then
+          unless statement["Principal"]["AWS"].match(iam_regex) then
             retval = retval && false
-            print "Invalid Principal #{statement["Principal"]["AWS"]}\n"
+            print "Invalid Principal #{statement["Principal"]["AWS"]} in Sid #{statement['Sid']}\n"
           end
         end
       end
