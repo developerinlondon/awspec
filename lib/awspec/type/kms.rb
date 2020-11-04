@@ -12,7 +12,7 @@ module Awspec::Type
       resource_via_client.enabled
     end
 
-    def has_valid_key_policy?(iam_regex)
+    def validate_key_policy?(iam_regex)
       retval = true
       res = kms_client.get_key_policy(key_id: id, policy_name: 'default')
       policy = JSON.parse(URI.decode(res.policy))
