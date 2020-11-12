@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_vpc_endpoint do |vpc_id|
     print "inside matcher #{vpc_id}"
-    match do |vpc_id|
+    match do |vpc|
       vpc.has_vpc_endpoint?
     end
   
