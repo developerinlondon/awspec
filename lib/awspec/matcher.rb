@@ -71,6 +71,7 @@ require 'awspec/matcher/belong_to_nlb'
 # VPC
 require 'awspec/matcher/be_connected_to_vpc'
 require 'awspec/matcher/have_vpc_peering_connection'
+require 'awspec/matcher/have_vpc_endpoint'
 
 # SNSTopic
 require 'awspec/matcher/include_subscribed'
