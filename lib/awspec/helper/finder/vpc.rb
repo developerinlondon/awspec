@@ -73,11 +73,8 @@ module Awspec::Helper
         res.vpc_peering_connections.single_resource(vpc_peering_connection_id)
       end
 
-      def select_vpc_endpoints_by_vpc_id(vpc_id)
-        res = ec2_client.describe_vpc_endpoints({
-                                              #   filters: [{ name: 'vpc-id', values: [vpc_id] }]
-                                               })
-        print "result for endpoint is #{res}"
+      def select_vpc_endpoints()
+        ec2_client.describe_vpc_endpoints({})
       end
 
       def select_vpc_peering_connection_by_vpc_id(vpc_id, status_code = nil)

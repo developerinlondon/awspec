@@ -59,11 +59,27 @@ module Awspec::Type
             end
     end
 
-    def has_vpc_endpoint?
-      print "resource via client (type) - #{resource_via_client.vpc_id}"
-      endpoints = select_vpc_endpoints_by_vpc_id(resource_via_client.vpc_id)
-
-    
+    def has_valid_vpc_endpoints?
+      res = select_vpc_endpoints
+      retval = true
+      endpoints = JSON.parse(URI.decode(res))
+      endpoints[":vpc_endpoints"].each do |vpc_endpoint|
+        print "#{vpc_endpoint}\n\n"
+        # if vpc_endpoint["Principal"]["AWS"].kind_of?(Array) then
+        #   statement["Principal"]["AWS"].each do |principal|
+        #     unless principal.match(iam_regex) then
+        #       retval = retval && false
+        #       print "Invalid Principal #{principal} in Sid #{statement['Sid']}\n"
+        #     end
+        #   end
+        # else
+        #   unless statement["Principal"]["AWS"].match(iam_regex) then
+        #     retval = retval && false
+        #     print "Invalid Principal #{statement["Principal"]["AWS"]} in Sid #{statement['Sid']}\n"
+        #   end
+        # end
+      end
+      return retval
     end
 
     def has_vpc_attribute?(vpc_attribute)
