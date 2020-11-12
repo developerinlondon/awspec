@@ -11,6 +11,26 @@ module Awspec::Helper
           false
       end
 
+      def find_kms_key(key_id)
+        kms_client.describe_key(key_id: key_id).key_metadata
+      rescue
+        nil
+      end
+
+      def find_kms_key_by_alias(key_alias_name)
+        alias_name = key_alias_name.start_with?('alias/') ? key_alias_name : "alias/#{key_alias_name}"
+        found = nil
+        next_marker = nil
+
+        loop do
+          res = kms_client.list_aliases(marker: next_marker, limit: 100)
+          found = res.aliases.find { |key_alias| key_alias.alias_name == alias_name }
+          (found.nil? && next_marker = res.next_marker) || break
+        end
+
+        find_kms_key(found.target_key_id) if found
+      end
+
       def find_bucket_acl(id)
         s3_client.get_bucket_acl(bucket: id)
         rescue
@@ -42,7 +62,7 @@ module Awspec::Helper
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: ssekms_key_id,
+                                      ssekms_key_id: find_kms_key_by_alias(ssekms_key_id),
                                       body: body
                                     })
         rescue
