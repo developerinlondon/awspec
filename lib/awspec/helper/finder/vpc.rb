@@ -10,6 +10,7 @@ module Awspec::Helper
         res = ec2_client.describe_vpcs({
                                          filters: [{ name: 'tag:Name', values: [id] }]
                                        })
+        print "res for find_vpc is #{res}"
         res.vpcs.single_resource(id)
       end
 
