@@ -62,7 +62,7 @@ module Awspec::Type
     def has_valid_vpc_endpoints?()
       res = select_vpc_endpoints()
       retval = true
-      endpoints = JSON.parse(URI.decode(res.vpc_endpoints))
+      endpoints = JSON.parse(res.vpc_endpoints)
       endpoints.each do |vpc_endpoint|
         print "#{vpc_endpoint}\n\n"
         # if vpc_endpoint["Principal"]["AWS"].kind_of?(Array) then
