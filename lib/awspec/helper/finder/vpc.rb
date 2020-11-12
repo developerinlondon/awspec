@@ -77,7 +77,7 @@ module Awspec::Helper
         res = ec2_client.describe_vpc_endpoint_connections({
                                                  #filters: [{ name: 'vpc-id', values: [vpc_id] }]
                                                })
-        print res
+        print "result for endpoint is #{res}"
       end
 
       def select_vpc_peering_connection_by_vpc_id(vpc_id, status_code = nil)
