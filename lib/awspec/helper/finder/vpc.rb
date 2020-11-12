@@ -74,8 +74,8 @@ module Awspec::Helper
       end
 
       def select_vpc_endpoints_by_vpc_id(vpc_id)
-        res = ec2_client.describe_vpc_endpoint_connections({
-                                                 #filters: [{ name: 'vpc-id', values: [vpc_id] }]
+        res = ec2_client.describe_vpc_endpoints({
+                                                 filters: [{ name: 'vpc-id', values: [vpc_id] }]
                                                })
         print "result for endpoint is #{res}"
       end
