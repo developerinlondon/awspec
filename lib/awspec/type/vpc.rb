@@ -59,8 +59,8 @@ module Awspec::Type
             end
     end
 
-    def has_vpc_endpoint?(vpc_id)
-      endpoints = select_vpc_endpoints_by_vpc_id(vpc_id)
+    def has_vpc_endpoint?
+      endpoints = select_vpc_endpoints_by_vpc_id(resource_via_client.vpc_id)
 
     
     end

@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_vpc_endpoint do |vpc_id|
     match do |vpc_id|
-      vpc.has_vpc_endpoint?(vpc_id)
+      vpc.has_vpc_endpoint?
     end
   
     # chain :as_accepter do
