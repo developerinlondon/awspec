@@ -13,8 +13,8 @@ module Awspec::Helper
 
       def find_kms_key(key_id)
         kms_client.describe_key(key_id: key_id).key_metadata
-      rescue
-        nil
+      # rescue
+      #   nil
       end
 
       def find_kms_key_by_alias(key_alias_name)
@@ -58,16 +58,17 @@ module Awspec::Helper
       end
 
       def put_object(id, key, body, server_side_encryption, ssekms_key_id)
-
+        kms_key_id = find_kms_key_by_alias(ssekms_key_id)
+        print("ksm key id is #{kms_key_id}")
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: find_kms_key_by_alias(ssekms_key_id),
+                                      ssekms_key_id: kms_key_id.key_id,
                                       body: body
                                     })
-        rescue
-          false
+        # rescue
+        #   false
       end
 
       def put_prefix(id, key, server_side_encryption, ssekms_key_id)
