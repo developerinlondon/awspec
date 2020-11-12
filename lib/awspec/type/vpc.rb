@@ -60,7 +60,7 @@ module Awspec::Type
     end
 
     def has_valid_vpc_endpoints?
-      res = select_vpc_endpoints
+      res = select_vpc_endpoints()
       retval = true
       endpoints = JSON.parse(URI.decode(res))
       endpoints[":vpc_endpoints"].each do |vpc_endpoint|
