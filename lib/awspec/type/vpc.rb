@@ -59,7 +59,7 @@ module Awspec::Type
             end
     end
 
-    def has_valid_vpc_endpoints?()
+    def has_valid_vpc_endpoints?(specified_services = [])
       res = select_vpc_endpoints()
       retval = true
       #endpoints = res.vpc_endpoints
