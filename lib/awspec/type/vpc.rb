@@ -60,6 +60,7 @@ module Awspec::Type
     end
 
     def has_vpc_endpoint?
+      print "resource via client (type) - #{resource_via_client.vpc_id}"
       endpoints = select_vpc_endpoints_by_vpc_id(resource_via_client.vpc_id)
 
     

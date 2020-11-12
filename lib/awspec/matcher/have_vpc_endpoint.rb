@@ -1,4 +1,5 @@
 RSpec::Matchers.define :have_vpc_endpoint do |vpc_id|
+    print vpc_id
     match do |vpc_id|
       vpc.has_vpc_endpoint?
     end
