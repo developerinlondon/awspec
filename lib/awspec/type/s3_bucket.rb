@@ -62,7 +62,9 @@ module Awspec::Type
     end
 
     def has_put_object_permission?(s3_file:, local_file:, server_side_encryption: nil, ssekms_key_id: nil)
-      put_object(id, s3_file, local_file, server_side_encryption, ssekms_key_id)
+      kms_key_id = find_kms_key_by_alias(ssekms_key_id)
+      print("ksm key id is #{kms_key_id}")
+      put_object(id, s3_file, local_file, server_side_encryption, kms_key_id)
     end
 
     def has_put_prefix_permission?(s3_prefix:, server_side_encryption: nil, ssekms_key_id: nil)
