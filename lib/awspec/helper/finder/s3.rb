@@ -59,12 +59,13 @@ module Awspec::Helper
           false
       end
 
-      def put_object(id, key, body, server_side_encryption, ssekms_key_id)
+      def put_object(id, key, body, server_side_encryption, ssekms_key_id = nil)
+        ssekms_key_id = get_kms_key_id(ssekms_key_id) unless ssekms_key_id.nil?
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: get_kms_key_id(ssekms_key_id),
+                                      ssekms_key_id: ssekms_key_id,
                                       body: body
                                     })
         # rescue
