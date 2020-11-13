@@ -17,18 +17,18 @@ module Awspec::Helper
       #   nil
       end
 
-      def find_kms_key_by_alias(key_alias_name)
-        alias_name = key_alias_name.start_with?('alias/') ? key_alias_name : "alias/#{key_alias_name}"
+      def get_kms_key_id(key_alias_name)
+        return find_kms_key(key_alias_name).key_id unless key_alias_name.start_with?('alias/')
         found = nil
         next_marker = nil
 
         loop do
           res = kms_client.list_aliases(marker: next_marker, limit: 100)
-          found = res.aliases.find { |key_alias| key_alias.alias_name == alias_name }
+          found = res.aliases.find { |key_alias| key_alias.alias_name == kwy_alias_name }
           (found.nil? && next_marker = res.next_marker) || break
         end
 
-        find_kms_key(found.target_key_id) if found
+        find_kms_key(found.target_key_id).key_id if found
       end
 
       def find_bucket_acl(id)
@@ -58,13 +58,11 @@ module Awspec::Helper
       end
 
       def put_object(id, key, body, server_side_encryption, ssekms_key_id)
-        kms_key_id = find_kms_key_by_alias(ssekms_key_id)
-        print("ksm key id is #{kms_key_id}")
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: kms_key_id.key_id,
+                                      ssekms_key_id: get_kms_key_id(ssekms_key_id),
                                       body: body
                                     })
         # rescue
@@ -76,10 +74,10 @@ module Awspec::Helper
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: ssekms_key_id
+                                      ssekms_key_id: get_kms_key_id(ssekms_key_id)
                                     })
-        rescue
-          false
+        # rescue
+        #   false
       end
 
       def delete_object(id, key)
