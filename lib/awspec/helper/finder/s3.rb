@@ -12,13 +12,13 @@ module Awspec::Helper
       end
 
       def find_kms_key(key_id)
-        kms_client.describe_key(key_id: key_id).key_metadata
+        kms_client.describe_key(key_id: key_id).key_metadata.key_id
       # rescue
       #   nil
       end
 
       def get_kms_key_id(key_alias_name)
-        return find_kms_key(key_alias_name).key_id unless key_alias_name.start_with?('alias/')
+        return key_alias_name unless key_alias_name.start_with?('alias/')
         found = nil
         next_marker = nil
 
@@ -28,7 +28,7 @@ module Awspec::Helper
           (found.nil? && next_marker = res.next_marker) || break
         end
 
-        find_kms_key(found.target_key_id).key_id if found
+        find_kms_key(found.target_key_id) if found
       end
 
       def find_bucket_acl(id)
