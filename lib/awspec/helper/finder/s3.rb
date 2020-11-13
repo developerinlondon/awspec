@@ -28,9 +28,11 @@ module Awspec::Helper
 
         loop do
           res = kms_client.list_aliases(marker: next_marker, limit: 100)
-          print "list of aliases #{res}"
+          print "list of aliases #{res.count}"
           found = res.aliases.find { |key_alias| key_alias.alias_name == kwy_alias_name }
+          print "after found"
           (found.nil? && next_marker = res.next_marker) || break
+          print "after breaker"
         end
 
         find_kms_key(found.target_key_id) if found
