@@ -24,8 +24,11 @@ module Awspec::Helper
         found = nil
         next_marker = nil
 
+        print "testing key #{key_alias_name}"
+
         loop do
           res = kms_client.list_aliases(marker: next_marker, limit: 100)
+          print "list of aliases #{res}"
           found = res.aliases.find { |key_alias| key_alias.alias_name == kwy_alias_name }
           (found.nil? && next_marker = res.next_marker) || break
         end
@@ -72,7 +75,7 @@ module Awspec::Helper
           false
       end
 
-      def put_prefix(id, key, server_side_encryption, ssekms_key_id)
+      def put_prefix(id, key, server_side_encryption, ssekms_key_id = nil)
         ssekms_key_id = get_kms_key_id(ssekms_key_id) unless ssekms_key_id.nil?
         res = s3_client.put_object({
                                       bucket: id,
