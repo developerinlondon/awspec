@@ -18,6 +18,7 @@ module Awspec::Helper
       end
 
       def get_kms_key_id(key_alias_name)
+        return nil unless defined?(key_alias_name)
         return key_alias_name unless key_alias_name.start_with?('alias/')
         found = nil
         next_marker = nil
