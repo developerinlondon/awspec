@@ -68,19 +68,20 @@ module Awspec::Helper
                                       ssekms_key_id: ssekms_key_id,
                                       body: body
                                     })
-        # rescue
-        #   false
+        rescue Aws::S3::Errors::AccessDenied
+          false
       end
 
       def put_prefix(id, key, server_side_encryption, ssekms_key_id)
+        ssekms_key_id = get_kms_key_id(ssekms_key_id) unless ssekms_key_id.nil?
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
                                       ssekms_key_id: get_kms_key_id(ssekms_key_id)
                                     })
-        # rescue
-        #   false
+        rescue Aws::S3::Errors::AccessDenied
+          false
       end
 
       def delete_object(id, key)
