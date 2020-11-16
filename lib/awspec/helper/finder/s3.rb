@@ -24,23 +24,15 @@ module Awspec::Helper
         found = nil
         next_marker = nil
 
-        print "testing key #{key_alias_name}"
-
         loop do
           res = kms_client.list_aliases(marker: next_marker, limit: 100)
-          print "\nDEBUG: no of aliases found #{res.aliases.count}\n"
-          #found = res.aliases.find { |key_alias| key_alias.alias_name == kwy_alias_name }
           res.aliases.each do |key_alias|
-            print "comparing #{key_alias.alias_name} with #{key_alias_name}\n\n"
             if (key_alias_name == key_alias.alias_name)
-              print "match found \n"
               found = key_alias
               break
             end
           end
-          print "\nDEBUG: after found"
           (found.nil? && next_marker = res.next_marker) || break
-          print "after breaker"
         end
 
         find_kms_key(found.target_key_id).key_id if found
