@@ -32,11 +32,11 @@ module Awspec::Helper
           #found = res.aliases.find { |key_alias| key_alias.alias_name == kwy_alias_name }
           res.aliases.each do |key_alias|
             print "comparing #{key_alias.alias_name} with #{key_alias_name}\n\n"
-            if (key_alias_name == key_alias.alias_name) do
-              print "match found \n"
-              found = key_alias
-              break
-            end
+            # if (key_alias_name == key_alias.alias_name) do
+            #   print "match found \n"
+            #   found = key_alias
+            #   break
+            # end
           end
           print "\nDEBUG: after found"
           (found.nil? && next_marker = res.next_marker) || break
