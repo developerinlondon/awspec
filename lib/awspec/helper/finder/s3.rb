@@ -12,7 +12,7 @@ module Awspec::Helper
       end
 
       def find_kms_key(key_id)
-        kms_client.describe_key(key_id: key_id).key_metadata.key_id
+        kms_client.describe_key(key_id: key_id).key_metadata
       # rescue
       #   nil
       end
@@ -32,14 +32,18 @@ module Awspec::Helper
           #found = res.aliases.find { |key_alias| key_alias.alias_name == kwy_alias_name }
           res.aliases.each do |key_alias|
             print "comparing #{key_alias.alias_name} with #{key_alias_name}\n\n"
-            found = key_alias if key_alias.alias_name == key_alias_name
+            if key_alias_name == key_alias.alias_name do
+              print "match found \n"
+              found = key_alias
+              break
+            end
           end
           print "\nDEBUG: after found"
           (found.nil? && next_marker = res.next_marker) || break
           print "after breaker"
         end
 
-        find_kms_key(found.target_key_id) if found
+        find_kms_key(found.target_key_id).key_id if found
       end
 
       def find_bucket_acl(id)
