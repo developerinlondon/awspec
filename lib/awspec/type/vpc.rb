@@ -59,6 +59,29 @@ module Awspec::Type
             end
     end
 
+    def has_valid_vpc_endpoints?(specified_services = [])
+      services_to_check = specified_services.map(&:clone)
+      res = select_vpc_endpoints()
+      retval = true
+      vpc_id = ''
+      res.vpc_endpoints.each do |vpc_endpoint|
+        vpc_id = vpc_endpoint.vpc_id
+        endpoint_service_name =  vpc_endpoint.service_name.match(/.*?\..*?\..*?\.(.*)/)[1]
+        unless services_to_check.include? endpoint_service_name
+          print "==> Unexpected Endpoint present: #{vpc_endpoint.service_name} in vpc-endpoint #{vpc_endpoint.vpc_endpoint_id} in vpc #{vpc_endpoint.vpc_id}\n"
+          retval = false
+        else
+          services_to_check.delete(endpoint_service_name)
+        end
+
+      end
+      if services_to_check.any?
+        print "==> Expected Endpoint Services Missing: #{services_to_check} in vpc #{vpc_id}\n"
+        retval = false
+      end
+      return retval
+    end
+
     def has_vpc_attribute?(vpc_attribute)
       find_vpc_attribute(resource_via_client.vpc_id, vpc_attribute)
     end

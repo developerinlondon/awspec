@@ -11,6 +11,30 @@ module Awspec::Helper
           false
       end
 
+      def find_kms_key(key_id)
+        kms_client.describe_key(key_id: key_id).key_metadata
+      end
+
+      def get_kms_key_id(key_alias_name)
+        return nil if key_alias_name.nil?
+        return key_alias_name unless key_alias_name.start_with?('alias/')
+        found = nil
+        next_marker = nil
+
+        loop do
+          res = kms_client.list_aliases(marker: next_marker, limit: 100)
+          res.aliases.each do |key_alias|
+            if (key_alias_name == key_alias.alias_name)
+              found = key_alias
+              break
+            end
+          end
+          (found.nil? && next_marker = res.next_marker) || break
+        end
+
+        find_kms_key(found.target_key_id).key_id if found
+      end
+
       def find_bucket_acl(id)
         s3_client.get_bucket_acl(bucket: id)
         rescue
@@ -37,7 +61,8 @@ module Awspec::Helper
           false
       end
 
-      def put_object(id, key, body, server_side_encryption, ssekms_key_id)
+      def put_object(id, key, body, server_side_encryption, ssekms_key_id = nil)
+        ssekms_key_id = get_kms_key_id(ssekms_key_id) unless ssekms_key_id.nil?
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
@@ -45,18 +70,19 @@ module Awspec::Helper
                                       ssekms_key_id: ssekms_key_id,
                                       body: body
                                     })
-        rescue
+        rescue Aws::S3::Errors::AccessDenied
           false
       end
 
-      def put_prefix(id, key, server_side_encryption, ssekms_key_id)
+      def put_prefix(id, key, server_side_encryption, ssekms_key_id = nil)
+        ssekms_key_id = get_kms_key_id(ssekms_key_id) unless ssekms_key_id.nil?
         res = s3_client.put_object({
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: ssekms_key_id
+                                      ssekms_key_id: get_kms_key_id(ssekms_key_id)
                                     })
-        rescue
+        rescue Aws::S3::Errors::AccessDenied
           false
       end
 
