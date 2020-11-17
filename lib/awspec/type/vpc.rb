@@ -60,7 +60,7 @@ module Awspec::Type
     end
 
     def has_valid_vpc_endpoints?(specified_services = [])
-      services_to_check = specified_services
+      services_to_check = specified_services.clone
       res = select_vpc_endpoints()
       retval = true
       vpc_id = ''
@@ -72,7 +72,7 @@ module Awspec::Type
           print "==> Unexpected Endpoint present: #{vpc_endpoint.service_name} in vpc-endpoint #{vpc_endpoint.vpc_endpoint_id} in vpc #{vpc_endpoint.vpc_id}\n"
           retval = false
         else
-        #  services_to_check.delete(endpoint_service_name)
+        s  services_to_check.delete(endpoint_service_name)
         end
 
       end
