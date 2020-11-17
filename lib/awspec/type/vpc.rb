@@ -60,7 +60,7 @@ module Awspec::Type
     end
 
     def has_valid_vpc_endpoints?(specified_services = [])
-      services_to_check = specified_services.clone
+      services_to_check = specified_services.map(&:clone)
       res = select_vpc_endpoints()
       retval = true
       vpc_id = ''
