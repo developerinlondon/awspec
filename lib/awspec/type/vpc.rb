@@ -60,23 +60,24 @@ module Awspec::Type
     end
 
     def has_valid_vpc_endpoints?(specified_services = [])
+      services_to_check = specified_services
       res = select_vpc_endpoints()
       retval = true
       vpc_id = ''
       res.vpc_endpoints.each do |vpc_endpoint|
         vpc_id = vpc_endpoint.vpc_id
-        print "#{vpc_endpoint}\n\n"
+        #print "#{vpc_endpoint}\n\n"
         endpoint_service_name =  vpc_endpoint.service_name.match(/.*?\..*?\..*?\.(.*)/)[1]
-        unless specified_services.include? endpoint_service_name
+        unless services_to_check.include? endpoint_service_name
           print "==> Unexpected Endpoint present: #{vpc_endpoint.service_name} in vpc-endpoint #{vpc_endpoint.vpc_endpoint_id} in vpc #{vpc_endpoint.vpc_id}\n"
           retval = false
         else
-          specified_services.delete(endpoint_service_name)
+          services_to_check.delete(endpoint_service_name)
         end
 
       end
-      if specified_services.any?
-        print "==> Expected Endpoint Services Missing: #{specified_services} in vpc #{vpc_id}\n"
+      if services_to_check.any?
+        print "==> Expected Endpoint Services Missing: #{services_to_check} in vpc #{vpc_id}\n"
         retval = false
       end
       return retval
