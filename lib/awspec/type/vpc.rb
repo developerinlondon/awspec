@@ -62,9 +62,11 @@ module Awspec::Type
     def has_valid_vpc_endpoints?(specified_services = [])
       res = select_vpc_endpoints()
       retval = true
+      current_services = []
       #endpoints = res.vpc_endpoints
       res.vpc_endpoints.each do |vpc_endpoint|
         print "#{vpc_endpoint}\n\n"
+        current_services << vpc_endpoint.service_name
         # if vpc_endpoint["Principal"]["AWS"].kind_of?(Array) then
         #   statement["Principal"]["AWS"].each do |principal|
         #     unless principal.match(iam_regex) then
@@ -79,6 +81,10 @@ module Awspec::Type
         #   end
         # end
       end
+      print "list of services present: #{current_services}\n"
+      print "list of services expected: #{specified_services}\n"
+      print "services present but not expected: #{current_services - specified_services}\n"
+      print "services expected but not present: #{specified_services - current_services}\n"
       return retval
     end
 
