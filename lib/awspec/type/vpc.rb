@@ -66,7 +66,7 @@ module Awspec::Type
       #endpoints = res.vpc_endpoints
       res.vpc_endpoints.each do |vpc_endpoint|
         print "#{vpc_endpoint}\n\n"
-        current_services << vpc_endpoint.service_name.scan(/.*?\..*?\..*?\.(.*)/)
+        current_services << vpc_endpoint.service_name.match(/.*?\..*?\..*?\.(.*)/)[1]
         # if vpc_endpoint["Principal"]["AWS"].kind_of?(Array) then
         #   statement["Principal"]["AWS"].each do |principal|
         #     unless principal.match(iam_regex) then
