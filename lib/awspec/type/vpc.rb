@@ -72,7 +72,7 @@ module Awspec::Type
           print "==> Unexpected Endpoint present: #{vpc_endpoint.service_name} in vpc-endpoint #{vpc_endpoint.vpc_endpoint_id} in vpc #{vpc_endpoint.vpc_id}\n"
           retval = false
         else
-        s  services_to_check.delete(endpoint_service_name)
+          services_to_check.delete(endpoint_service_name)
         end
 
       end
