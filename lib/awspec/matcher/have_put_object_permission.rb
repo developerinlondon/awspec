@@ -11,7 +11,7 @@ RSpec::Matchers.define :have_put_object_permission do
       @remote_file = remote_file
     end    
 
-    chain :using_kms_key_id do |kms_key_id|
+    chain :using_kms_key do |kms_key_id|
       @server_side_encryption = "aws:kms"
       @ssekms_key_id = kms_key_id
     end

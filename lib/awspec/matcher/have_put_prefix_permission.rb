@@ -7,7 +7,7 @@ RSpec::Matchers.define :have_put_prefix_permission do
         @prefix = prefix
     end
 
-    chain :using_kms_key_id do |kms_key_id|
+    chain :using_kms_key do |kms_key_id|
       @server_side_encryption = "aws:kms"
       @ssekms_key_id = kms_key_id
     end
