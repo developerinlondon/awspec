@@ -11,10 +11,6 @@ module Awspec::Helper
           false
       end
 
-      def find_kms_key(key_id)
-        kms_client.describe_key(key_id: key_id).key_metadata
-      end
-
       def get_kms_key_id(key_alias_name)
         return nil if key_alias_name.nil?
         return key_alias_name unless key_alias_name.start_with?('alias/')
@@ -32,7 +28,8 @@ module Awspec::Helper
           (found.nil? && next_marker = res.next_marker) || break
         end
 
-        find_kms_key(found.target_key_id).key_id if found
+        return nil if found.nil?
+        found.target_key_id if found
       end
 
       def find_bucket_acl(id)
@@ -70,8 +67,11 @@ module Awspec::Helper
                                       ssekms_key_id: ssekms_key_id,
                                       body: body
                                     })
+        return res
         rescue Aws::S3::Errors::AccessDenied
           false
+        rescue => e
+          puts "ERROR: An error of type #{e.class} happened, message is #{e.message}"
       end
 
       def put_prefix(id, key, server_side_encryption, ssekms_key_id = nil)
@@ -80,7 +80,7 @@ module Awspec::Helper
                                       bucket: id,
                                       key: key,
                                       server_side_encryption: server_side_encryption,
-                                      ssekms_key_id: get_kms_key_id(ssekms_key_id)
+                                      ssekms_key_id: ssekms_key_id
                                     })
         rescue Aws::S3::Errors::AccessDenied
           false
