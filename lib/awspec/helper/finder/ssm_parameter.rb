@@ -14,6 +14,7 @@ module Awspec::Helper
             }).parameters[0]
           rescue Aws::SSM::Errors::ThrottlingException
             sleep 0.5
+            puts "retrying after sleeping 0.5 seconds\n"
             ssm_client.describe_parameters(
               {
                 filters:  [
