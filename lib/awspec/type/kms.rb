@@ -17,6 +17,7 @@ module Awspec::Type
       res = kms_client.get_key_policy(key_id: id, policy_name: 'default')
       policy = JSON.parse(URI.decode(res.policy))
       policy["Statement"].each do |statement|
+        puts "STATEMENT: #{statement}\n"
         if statement["Principal"]["AWS"].kind_of?(Array) then
           statement["Principal"]["AWS"].each do |principal|
             unless principal.match(iam_regex) then
