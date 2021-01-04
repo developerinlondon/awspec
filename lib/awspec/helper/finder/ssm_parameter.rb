@@ -2,15 +2,29 @@ module Awspec::Helper
   module Finder
     module SsmParameter
       def find_ssm_parameter(name)
-        ssm_client.describe_parameters(
-          {
-            filters:  [
+        begin
+          ssm_client.describe_parameters(
+            {
+              filters:  [
+                {
+                  key: 'Name',
+                  values: [name]
+                }
+              ]
+            }).parameters[0]
+          rescue Aws::SSM::Errors::ThrottlingException
+            sleep 0.5
+            puts "retrying after sleeping 0.5 seconds\n"
+            ssm_client.describe_parameters(
               {
-                key: 'Name',
-                values: [name]
-              }
-            ]
-          }).parameters[0]
+                filters:  [
+                  {
+                    key: 'Name',
+                    values: [name]
+                  }
+                ]
+              }).parameters[0]
+          end
       end
 
       def find_parameter_tag(id, tag_key)

@@ -47,7 +47,8 @@ require 'awspec/matcher/have_custom_response_error_code'
 
 # Kms
 require 'awspec/matcher/have_key_policy'
-require 'awspec/matcher/validate_key_policy'
+require 'awspec/matcher/have_valid_key_policy'
+require 'awspec/matcher/have_principal'
 
 # WafWebAcl / AlbListener
 require 'awspec/matcher/have_rule'

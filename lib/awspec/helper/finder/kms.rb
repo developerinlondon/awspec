@@ -21,6 +21,21 @@ module Awspec::Helper
         find_kms_key(found.target_key_id) if found
       end
 
+      def match_action(principal, action, principal_regex, action_regex = nil)
+        retval = false
+        if principal.match(principal_regex) then
+          return true if action_regex.nil?
+          if action.kind_of?(Array) then
+            action.each do |one_action|
+              return true if one_action.match(action_regex)
+            end
+          else
+            return true if action.match(action_regex)
+          end
+        end
+        return retval
+      end
+
       def select_all_kms_aliases
         all_aliases = []
         next_marker = nil
