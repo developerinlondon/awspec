@@ -21,9 +21,9 @@ module Awspec::Helper
         find_kms_key(found.target_key_id) if found
       end
 
-      def match_action(principal, action, principal_regex, action_regex = nil)
+      def match_action(principal, action, principal_to_match, action_regex = nil)
         retval = false
-        if principal.match(principal_regex) then
+        if principal.eql?(principal_to_match) then
           return true if action_regex.nil?
           if action.kind_of?(Array) then
             action.each do |one_action|
