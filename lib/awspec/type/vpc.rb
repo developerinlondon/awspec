@@ -66,7 +66,7 @@ module Awspec::Type
       vpc_id = ''
       res.vpc_endpoints.each do |vpc_endpoint|
         vpc_id = vpc_endpoint.vpc_id
-        endpoint_service_name =  vpc_endpoint.service_name.match(/.*?\..*?\..*?\.(.*)/)[1]
+        endpoint_service_name =  vpc_endpoint.service_name.match(/.*?\..*?\.(?:.*\.)?.*?\.(.*)/)[1]
         unless services_to_check.include? endpoint_service_name
           print "==> Unexpected Endpoint present: #{vpc_endpoint.service_name} in vpc-endpoint #{vpc_endpoint.vpc_endpoint_id} in vpc #{vpc_endpoint.vpc_id}\n"
           retval = false
