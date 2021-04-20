@@ -102,3 +102,6 @@ require 'awspec/matcher/have_update_table_permission'
 
 require 'awspec/matcher/have_create_database_permission'
 require 'awspec/matcher/have_delete_database_permission'
+
+# VPCE
+require 'awspec/matcher/have_valid_vpce_policy'
